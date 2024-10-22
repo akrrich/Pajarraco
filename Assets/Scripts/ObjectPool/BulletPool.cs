@@ -3,44 +3,47 @@ using UnityEngine;
 
 public class BulletPool : MonoBehaviour
 {
-    [SerializeField] private Bullet bulletPrefab;
+    [SerializeField] private PlayerBullet bulletPrefab;
 
-    private Queue<Bullet> bulletPool = new Queue<Bullet>();
+    private List<PlayerBullet> bulletPool = new List<PlayerBullet>();
 
-    private int initialPoolSize = 15;
+    private int initialPoolSize = 25;
+    private int currentBulletIndex = 0;
 
 
     void Start()
     {
         for (int i = 0; i < initialPoolSize; i++)
         {
-            Bullet bulletInstance = Instantiate(bulletPrefab);
+            PlayerBullet bulletInstance = Instantiate(bulletPrefab);
             bulletInstance.gameObject.SetActive(false);
-            bulletPool.Enqueue(bulletInstance);
+            bulletPool.Add(bulletInstance);
         }
     }
 
-    public Bullet GetBullet()
+    public PlayerBullet GetBullet()
     {
-        Bullet bullet;
+        PlayerBullet bullet = null;
 
-        if (bulletPool.Count > 0)
+        for (int i = 0; i < bulletPool.Count; i++)
         {
-            bullet = bulletPool.Dequeue();
-            bullet.gameObject.SetActive(true);
-            return bullet;
+            int index = (currentBulletIndex + i) % bulletPool.Count;
+
+            if (!bulletPool[index].gameObject.activeInHierarchy)
+            {
+                bullet = bulletPool[index];
+                bullet.gameObject.SetActive(true);
+
+                currentBulletIndex = (index + 1) % bulletPool.Count;
+                break;
+            }
         }
 
-        else
-        {
-            bullet = Instantiate(bulletPrefab);
-            return bullet;
-        }
+        return bullet;
     }
 
-    public void ReturnBulletToPool(Bullet bullet)
+    public void ReturnBulletToPool(PlayerBullet bullet)
     {
         bullet.gameObject.SetActive(false);
-        bulletPool.Enqueue(bullet);
     }
 }

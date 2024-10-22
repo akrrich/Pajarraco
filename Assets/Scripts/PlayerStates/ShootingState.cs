@@ -12,7 +12,7 @@ public class ShootingState : IState
 
     public void Enter()
     {
-        Bullet bullet = player.BulletPool.GetBullet();
+        PlayerBullet bullet = player.BulletPool.GetBullet();
         bullet.InstantiateBullet(player.transform, player.BulletPool);
     }
 

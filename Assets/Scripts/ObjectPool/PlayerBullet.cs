@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
     private BulletPool bulletPool;
 
@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer sr;
     private CapsuleCollider2D capsule;
     private AudioSource audioShoot;
+
+    private static int damage = 1;
 
     private float speed = 5f;
     private float lifeTime = 3f;
@@ -28,11 +30,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //PauseManager.PauseAndUnPauseSounds(audioShoot);
-    }
 
+    public static void ApplyDamge(Enemy enemy)
+    {
+        enemy.Life -= damage;
+    }
 
     public void InstantiateBullet(Transform playerPosition, BulletPool pool)
     {
