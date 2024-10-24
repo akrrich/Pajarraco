@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class Player : MonoBehaviour
     private Animator anim;
     private BulletPool bulletPool;
     private StateController stateController;
+    private int currentHealth;
 
 
     private float speed = 5f;
@@ -14,7 +16,11 @@ public class Player : MonoBehaviour
 
     public Rigidbody2D Rb { get => rb; }
     public BulletPool BulletPool { get => bulletPool; }
-    public StateController StateController { get =>  stateController; }  
+    public StateController StateController { get =>  stateController; }
+    public int maxHealth = 100;
+    public HealthBar healthBar;
+   
+
 
     public float Speed { get => speed; set => speed = value; }
 
@@ -27,6 +33,9 @@ public class Player : MonoBehaviour
 
         stateController = new StateController(this);
         stateController.InitializeState(stateController.IdleState);
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -54,6 +63,20 @@ public class Player : MonoBehaviour
 
         
        
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    void Heal(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
     }
 
     void FixedUpdate()
