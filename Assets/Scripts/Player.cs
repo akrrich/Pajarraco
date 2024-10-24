@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     private BulletPool bulletPool;
     private StateController stateController;
 
+
     private float speed = 5f;
 
     private float horizontalInput;
@@ -31,11 +32,33 @@ public class Player : MonoBehaviour
     void Update()
     {
         stateController.UpdateState();
+        float moveInput = Input.GetAxis("Horizontal");
+
+        
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+        
+        anim.SetFloat("Speed", Mathf.Abs(moveInput));
+
+       
+        if (moveInput < 0) 
+        {
+            
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (moveInput > 0) 
+        {
+            
+            GetComponent<SpriteRenderer>().flipX = false; 
+        }
+
+        
+       
     }
 
     void FixedUpdate()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
+        //horizontalInput = Input.GetAxis("Horizontal");
+       // rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
     }
 }
