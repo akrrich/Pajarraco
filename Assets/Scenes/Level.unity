@@ -299,8 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f91a85c8cf8c6b418c70401485e8e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  healthBar: {fileID: 0}
 --- !u!50 &107778403
 Rigidbody2D:
   serializedVersion: 4
@@ -463,6 +461,9 @@ GameObject:
   m_Component:
   - component: {fileID: 203453732}
   - component: {fileID: 203453731}
+  - component: {fileID: 203453735}
+  - component: {fileID: 203453734}
+  - component: {fileID: 203453733}
   m_Layer: 0
   m_Name: fly-eye1
   m_TagString: Untagged
@@ -531,12 +532,66 @@ Transform:
   m_GameObject: {fileID: 203453730}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.1, y: 5.99, z: 0}
+  m_LocalPosition: {x: 0, y: 5.99, z: 0}
   m_LocalScale: {x: 7.561451, y: 7.7043695, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &203453733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203453730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ffaed0f1bed114a8cdcaffe4d13b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &203453734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203453730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e34278aa3adffa4b9a5b408ba45bc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyBullet: {fileID: -6357652820147978345, guid: 2ab5f8297900d8a4fa806b9466114745, type: 3}
+  leftLimit: -20
+  rightLimit: 20
+--- !u!50 &203453735
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203453730}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &314163957
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
         capsule = GetComponent<CircleCollider2D>();
         audioShoot = GetComponent<AudioSource>();
 
-        audioShoot.Play();
+        //audioShoot.Play();
         rb.velocity = Vector2.down * speed;
     }
 

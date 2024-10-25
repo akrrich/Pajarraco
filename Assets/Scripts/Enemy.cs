@@ -54,12 +54,12 @@ public class Enemy : MonoBehaviour
     {
         if (movingRight)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            rb.velocity = new Vector2(speed, 0);
         }
 
         else
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            rb.velocity = new Vector2(-speed,0);
         }
     }
 
