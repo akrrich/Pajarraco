@@ -37,6 +37,7 @@ public class PlayerBullet : MonoBehaviour
     public static void ApplyDamge(Enemy enemy)
     {
         enemy.Life -= damage;
+        Debug.Log(enemy);
     }
 
     public void InstantiateBullet(Transform playerPosition, BulletPool pool)
