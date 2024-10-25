@@ -11,8 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float leftLimit;
     [SerializeField] private float rightLimit;
 
-    private int life = 10;
+    [SerializeField] private int life = 10;
     private int minLife = 1;
+    private int currentLife;
 
     private float speed = 5f;
     private float counterForAttack = 0f;
@@ -21,12 +22,14 @@ public class Enemy : MonoBehaviour
     private bool movingRight = true;
 
     public int Life { get => life; set => life = value; }
+    public HealthBar healthBar;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        currentLife = life;
     }
 
     void Update()
@@ -40,12 +43,11 @@ public class Enemy : MonoBehaviour
     {
         Move();
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            PlayerBullet.ApplyDamge(this);
+            TakeDamage(PlayerBullet.Damage);
         }
     }
 
@@ -54,12 +56,12 @@ public class Enemy : MonoBehaviour
     {
         if (movingRight)
         {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
+            rb.velocity = new Vector2(speed, 0);
         }
 
         else
         {
-            rb.velocity = new Vector2(-speed, rb.velocity.y);
+            rb.velocity = new Vector2(-speed,0);
         }
     }
 
@@ -93,5 +95,19 @@ public class Enemy : MonoBehaviour
         {
             // condicion de derrota
         }
+    }
+
+    private void TakeDamage( int damage)
+    {
+        currentLife -= damage;
+        if (currentLife < 0) currentLife = 0;
+        healthBar.SetHealth(currentLife);
+    }
+
+    private void Heal(int amount)
+    {
+        currentLife += amount;
+        if (currentLife > life) currentLife = life;
+        healthBar.SetHealth(currentLife);
     }
 }

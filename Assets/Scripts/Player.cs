@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private int life = 3;
     private int minLife = 1;
 
-    private float speed = 5f;
+    public float speed = 8f;
 
     private float horizontalInput;
 
@@ -39,6 +39,26 @@ public class Player : MonoBehaviour
     {
         stateController.UpdateState();
         CheckIfIsAlive();
+        float moveInput = Input.GetAxis("Horizontal");
+
+
+        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+
+
+        anim.SetFloat("Speed", Mathf.Abs(moveInput));
+
+
+        if (moveInput < 0)
+        {
+
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (moveInput > 0)
+        {
+
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
+
     }
 
     void FixedUpdate()
