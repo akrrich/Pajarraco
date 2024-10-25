@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpeedPowerUp : PowerUps
 {
-    protected override void ActivePowerUp()
+    protected override void ActivePowerUp(Collider2D collider)
     {
-        throw new System.NotImplementedException();
+        Player player = collider.gameObject.GetComponent<Player>();
+        SpeedCommand speedCommand = new SpeedCommand(player);
+        powerUpsManager.AddPowerUp(speedCommand, powerUpScriptable.DurationTimePowerUp);
     }
-
 }

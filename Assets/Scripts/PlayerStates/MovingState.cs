@@ -12,7 +12,15 @@ public class MovingState : IState
 
     public void Enter()
     {
-        player.Speed = 5f;
+        if (!player.ChangeSpeedForPowerUp)
+        {
+            player.Speed = 5f;
+        }
+
+        else
+        {
+            player.Speed = 8f;
+        }
     }
 
     public void Exit()

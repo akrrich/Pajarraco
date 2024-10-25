@@ -17,6 +17,8 @@ public class PlayerBullet : MonoBehaviour
 
     private Vector2 offsetBulletPosition = new Vector2(0, 0.8f);
 
+    public static int Damage { get =>  damage; set => damage = value; }
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {

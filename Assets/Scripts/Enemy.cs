@@ -82,9 +82,7 @@ public class Enemy : MonoBehaviour
 
         if (counterForAttack >= attackSeconds)
         {
-            Vector3 bulletSpawnPosition = transform.position - (Vector3)enemyBullet.OffsetBulletPosition;
-
-            Instantiate(enemyBullet, bulletSpawnPosition, quaternion.identity);
+            Instantiate(enemyBullet, transform.position + new Vector3(0f, -1), quaternion.identity);
             counterForAttack = 0f;
         }
     }

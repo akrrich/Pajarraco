@@ -205,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 87720227}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: -3.07, z: 0}
+  m_LocalPosition: {x: 0.02, y: -3.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -779,6 +779,50 @@ MonoBehaviour:
   enemyBullet: {fileID: -6357652820147978345, guid: 2ab5f8297900d8a4fa806b9466114745, type: 3}
   leftLimit: -8.4
   rightLimit: 8.4
+--- !u!1 &1975509942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1975509943}
+  - component: {fileID: 1975509944}
+  m_Layer: 0
+  m_Name: PowerUpsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1975509943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975509942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.1552215, y: -38011.562, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1975509944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975509942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda7da87bdc157a469a2b9727731e721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2076312406
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,9 +868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: -8538087170948110043, guid: 9417ff08f250d17409bc7cdb3475a674, type: 3}
+  - {fileID: 6128078489301843864, guid: 31d4590e8b447204e9d5c202135a35db, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -837,3 +880,4 @@ SceneRoots:
   - {fileID: 618619049}
   - {fileID: 403144309}
   - {fileID: 2076312407}
+  - {fileID: 1975509943}

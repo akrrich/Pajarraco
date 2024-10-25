@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
 
     private float horizontalInput;
 
+    private bool changeSpeedForPowerUp = false;
+
     public Rigidbody2D Rb { get => rb; }
     public BulletPool BulletPool { get => bulletPool; }
     public StateController StateController { get =>  stateController; }  
 
-    public float Speed { get => speed; set => speed = value; }
     public int Life { get => life; set => life = value; }   
+    public float Speed { get => speed; set => speed = value; }
+    public bool ChangeSpeedForPowerUp { get => changeSpeedForPowerUp; set => changeSpeedForPowerUp = value; }
 
 
     void Start()
@@ -36,8 +39,6 @@ public class Player : MonoBehaviour
     {
         stateController.UpdateState();
         CheckIfIsAlive();
-
-        print(Life);
     }
 
     void FixedUpdate()

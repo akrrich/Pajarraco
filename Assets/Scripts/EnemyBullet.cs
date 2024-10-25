@@ -12,10 +12,6 @@ public class EnemyBullet : MonoBehaviour
     private float speed = 5f;
     private float lifeTime = 3f;
 
-    private Vector2 offsetBulletPosition;
-
-    public Vector2 OffsetBulletPosition {  get => offsetBulletPosition; }
-
 
     void Start()
     {

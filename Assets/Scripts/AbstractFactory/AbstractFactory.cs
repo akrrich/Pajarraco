@@ -15,14 +15,19 @@ public class AbstractFactory : MonoBehaviour
         }
     }
 
+    void OnDestroy()
+    {
+        idPowerUps.Clear();
+    }
 
-    public static PowerUps CreatePowerUp(int id, Transform powerUpTransform)
+
+    public static PowerUps CreatePowerUp(int id, Vector2 powerUpPosition)
     {
         if (!idPowerUps.TryGetValue(id, out PowerUps powerUps))
         {
             return null;
         }
 
-        return Instantiate(powerUps, powerUpTransform.position, Quaternion.identity);
+        return Instantiate(powerUps, powerUpPosition, Quaternion.identity);
     }
 }
