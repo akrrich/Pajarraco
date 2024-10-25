@@ -6,6 +6,7 @@ public class PlayerBullet : MonoBehaviour
     private BulletPool bulletPool;
 
     private Rigidbody2D rb;
+    private Animator shoot;
     private SpriteRenderer sr;
     private CapsuleCollider2D capsule;
     private AudioSource audioShoot;
@@ -41,6 +42,7 @@ public class PlayerBullet : MonoBehaviour
     public void InstantiateBullet(Transform playerPosition, BulletPool pool)
     {
         bulletPool = pool;
+      
 
         transform.position = playerPosition.position + (Vector3)offsetBulletPosition;
         Initialize();
@@ -61,6 +63,7 @@ public class PlayerBullet : MonoBehaviour
         rb.velocity = Vector2.up * speed;
 
         audioShoot.Play();
+        
 
         Invoke("ReturnToPool", lifeTime);
     }
