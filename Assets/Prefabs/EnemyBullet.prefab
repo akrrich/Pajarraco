@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6999752412647008860}
   - component: {fileID: 19003052734464827}
+  - component: {fileID: -6357652820147978345}
   - component: {fileID: -8195103426012064403}
   - component: {fileID: -4608339274616476190}
   - component: {fileID: 1259547664777008089}
-  - component: {fileID: -6357652820147978345}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: EnemyBullet
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 4c4718430ae3993409360a5474573c91, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -88,6 +88,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-6357652820147978345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150995765596657153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ffaed0f1bed114a8cdcaffe4d13b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &-8195103426012064403
 Rigidbody2D:
   serializedVersion: 4
@@ -246,15 +258,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-6357652820147978345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5150995765596657153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56ffaed0f1bed114a8cdcaffe4d13b4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

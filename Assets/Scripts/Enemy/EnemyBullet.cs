@@ -10,7 +10,6 @@ public class EnemyBullet : MonoBehaviour
     private static int damage = 1;
 
     private float speed = 5f;
-    private float lifeTime = 3f;
 
 
     void Start()
@@ -20,7 +19,7 @@ public class EnemyBullet : MonoBehaviour
         capsule = GetComponent<CircleCollider2D>();
         audioShoot = GetComponent<AudioSource>();
 
-        //audioShoot.Play();
+        audioShoot.Play();
         rb.velocity = Vector2.down * speed;
     }
 

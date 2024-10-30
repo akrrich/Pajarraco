@@ -5,15 +5,16 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyBullet enemyBullet; 
 
+    private Player player;
+
     private Rigidbody2D rb;
     private Animator anim;
 
     [SerializeField] private float leftLimit;
     [SerializeField] private float rightLimit;
 
-    [SerializeField] private int life = 10;
+    private int life = 10;
     private int minLife = 1;
-    private int currentLife;
 
     private float speed = 5f;
     private float counterForAttack = 0f;
@@ -22,32 +23,35 @@ public class Enemy : MonoBehaviour
     private bool movingRight = true;
 
     public int Life { get => life; set => life = value; }
-    public HealthBar healthBar;
 
 
     void Start()
     {
+        player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        currentLife = life;
+
+        GameManager.Instance.GameStatePlaying += UpdateEnemy;
     }
 
-    void Update()
+    void UpdateEnemy()
     {
         CheckLimits();
         Attack();
         CheckIfIsAlive();
-    }
-
-    void FixedUpdate()
-    {
         Move();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GameStatePlaying -= UpdateEnemy;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            TakeDamage(PlayerBullet.Damage);
+            PlayerBullet.ApplyDamge(this);
         }
     }
 
@@ -95,19 +99,5 @@ public class Enemy : MonoBehaviour
         {
             // condicion de derrota
         }
-    }
-
-    private void TakeDamage( int damage)
-    {
-        currentLife -= damage;
-        if (currentLife < 0) currentLife = 0;
-        healthBar.SetHealth(currentLife);
-    }
-
-    private void Heal(int amount)
-    {
-        currentLife += amount;
-        if (currentLife > life) currentLife = life;
-        healthBar.SetHealth(currentLife);
     }
 }

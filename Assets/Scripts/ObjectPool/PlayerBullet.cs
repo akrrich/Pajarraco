@@ -18,12 +18,12 @@ public class PlayerBullet : MonoBehaviour
 
     private Vector2 offsetBulletPosition = new Vector2(0, 0.8f);
 
-    public static int Damage { get =>  damage; set => damage = value; }
+    public static int Damage { get => damage; set => damage = value; }
 
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("PlayerBullet"))
         {
             rb.isKinematic = true;
             sr.enabled = false;
@@ -43,7 +43,6 @@ public class PlayerBullet : MonoBehaviour
     public void InstantiateBullet(Transform playerPosition, BulletPool pool)
     {
         bulletPool = pool;
-      
 
         transform.position = playerPosition.position + (Vector3)offsetBulletPosition;
         Initialize();
@@ -64,9 +63,6 @@ public class PlayerBullet : MonoBehaviour
         rb.velocity = Vector2.up * speed;
 
         audioShoot.Play();
-        
-
-        Invoke("ReturnToPool", lifeTime);
     }
 
     private IEnumerator ReturnToPoolAfterAudio()

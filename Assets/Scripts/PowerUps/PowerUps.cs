@@ -25,13 +25,20 @@ public abstract class PowerUps : MonoBehaviour
         box = GetComponent<BoxCollider2D>();
         audiosPowerUp = GetComponents<AudioSource>();
 
+        GameManager.Instance.GameStatePlaying += UpdatePowerUp;
+
         //audiosPowerUp[0].Play();
     }
 
-    void Update()
+    void UpdatePowerUp()
     {
         MovePowerUp();
         StopPowerUp();
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GameStatePlaying -= UpdatePowerUp;
     }
 
     void OnTriggerEnter2D(Collider2D collider)

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
+    private Slider slider;
 
     public void SetMaxHealth(int health)
     {
