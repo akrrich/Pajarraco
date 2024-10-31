@@ -7,7 +7,7 @@ public abstract class PowerUps : MonoBehaviour
 
     private SpriteRenderer sr;
     private BoxCollider2D box;
-    private AudioSource[] audiosPowerUp; // indice 0 cuando se instancia, indice 1 cuando colisiona con player
+    private AudioSource powerUpPick; // indice 0 cuando se instancia, indice 1 cuando colisiona con player
 
     [SerializeField] private int id;
 
@@ -23,11 +23,11 @@ public abstract class PowerUps : MonoBehaviour
 
         sr = GetComponent<SpriteRenderer>();
         box = GetComponent<BoxCollider2D>();
-        audiosPowerUp = GetComponents<AudioSource>();
+        powerUpPick = GetComponent<AudioSource>();
 
         GameManager.Instance.GameStatePlaying += UpdatePowerUp;
 
-        //audiosPowerUp[0].Play();
+        
     }
 
     void UpdatePowerUp()
@@ -47,6 +47,7 @@ public abstract class PowerUps : MonoBehaviour
         {
             ActivePowerUp(collider);
             DestroyPowerUp();
+            powerUpPick.Play();
         }
     }
 

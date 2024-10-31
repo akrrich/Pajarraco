@@ -6,12 +6,16 @@ public class FinalScreens : MonoBehaviour
 
     private Player player;
 
+    public AudioSource respawnSound;
+
 
     void Start()
     {
         player = FindObjectOfType<Player>();
 
         PlayerEvents.OnPlayerDefeated += ShowDefeatedScreen;
+
+        respawnSound = GetComponent<AudioSource>();
     }
 
     void OnDestroy()
@@ -29,6 +33,8 @@ public class FinalScreens : MonoBehaviour
         screens[1].SetActive(false);
 
         GameManager.Instance.ChangeStateTo(GameState.Playing);
+
+        respawnSound.Play(0);
     }
 
     private void ShowWinScreen()
