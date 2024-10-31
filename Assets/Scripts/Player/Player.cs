@@ -12,10 +12,12 @@ public class Player : MonoBehaviour
     private int life = 3;
     private int minLife = 1;
 
-    public float speed = 8f;
+    private float speed = 8f;
+    private float counterForShoot = 0f;
 
     private float horizontalInput;
 
+    private bool canShoot = true;
     private bool changeSpeedForPowerUp = false;
 
     public Rigidbody2D Rb { get => rb; }
@@ -25,7 +27,9 @@ public class Player : MonoBehaviour
 
     public int Life { get => life; set => life = value; }   
     public float Speed { get => speed; set => speed = value; }
+    public float CounterForShoot { set => counterForShoot = value; }    
     public bool ChangeSpeedForPowerUp { get => changeSpeedForPowerUp; set => changeSpeedForPowerUp = value; }
+    public bool CanShoot { get => canShoot; set => canShoot = value; }
 
 
     void Start()
@@ -46,6 +50,7 @@ public class Player : MonoBehaviour
         stateController.UpdateState();
         CheckIfIsAlive();
         PlayerMovement();
+        CheckIfCanShootOrNot();
     }
 
     void OnDestroy()
@@ -88,6 +93,17 @@ public class Player : MonoBehaviour
             PlayerEvents.OnPlayerDefeated?.Invoke();
             playerMemento = new PlayerMemento(this);
             gameObject.SetActive(false);
+        }
+    }
+
+    private void CheckIfCanShootOrNot()
+    {
+        float timeToWait = 0.3f;
+        counterForShoot += Time.deltaTime;
+
+        if (counterForShoot >= timeToWait)
+        {
+            canShoot = true;
         }
     }
 }

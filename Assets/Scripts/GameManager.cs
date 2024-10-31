@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private event Action gameStateLose;
 
     private GameState gameState;
+    public GameState GameState { get => gameState; }
 
     public Action GameStatePlaying {  get => gameStatePlayin; set => gameStatePlayin = value; }
     public Action GameStateLose { get => gameStateLose; set => gameStateLose = value; }
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
             break;
 
             case GameState.Lose:
-
+                gameStateLose?.Invoke();
             break;
 
             case GameState.Win: 
@@ -69,23 +70,8 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ChangeStateToPlaying()
+    public void ChangeStateTo(GameState newState)
     {
-        gameState = GameState.Playing;
-    }
-
-    public void ChangeStateToWin()
-    {
-        gameState = GameState.Win;
-    }
-
-    public void ChangeStateToLose()
-    {
-        gameState = GameState.Lose;
-    }
-
-    public void ChangeStateToPause()
-    {
-        gameState = GameState.Pause; 
+        gameState = newState;
     }
 }

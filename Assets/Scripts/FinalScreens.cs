@@ -28,19 +28,19 @@ public class FinalScreens : MonoBehaviour
 
         screens[1].SetActive(false);
 
-        GameManager.Instance.ChangeStateToPlaying();
+        GameManager.Instance.ChangeStateTo(GameState.Playing);
     }
 
     private void ShowWinScreen()
     {
-        GameManager.Instance.ChangeStateToWin();
+        GameManager.Instance.ChangeStateTo(GameState.Win);
 
         screens[0].SetActive(true);
     }
 
     private void ShowDefeatedScreen()
     {
-        GameManager.Instance.ChangeStateToLose();
+        GameManager.Instance.ChangeStateTo(GameState.Lose);
 
         screens[1].SetActive(true);
     } 

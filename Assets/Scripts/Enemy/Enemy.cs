@@ -5,8 +5,6 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyBullet enemyBullet; 
 
-    private Player player;
-
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -27,11 +25,11 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         GameManager.Instance.GameStatePlaying += UpdateEnemy;
+        GameManager.Instance.GameStateLose += StopPhysics;
     }
 
     void UpdateEnemy()
@@ -45,6 +43,7 @@ public class Enemy : MonoBehaviour
     void OnDestroy()
     {
         GameManager.Instance.GameStatePlaying -= UpdateEnemy;
+        GameManager.Instance.GameStateLose -= StopPhysics;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -98,6 +97,14 @@ public class Enemy : MonoBehaviour
         if (life < minLife)
         {
             // condicion de derrota
+        }
+    }
+
+    private void StopPhysics()
+    {
+        if (GameManager.Instance.GameState != GameState.Playing)
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 }
