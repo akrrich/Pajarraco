@@ -27,7 +27,7 @@ public class IdleState : IState
             player.StateController.TransitionTo(player.StateController.MovingState);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Fire1"))
         {
             player.StateController.TransitionTo(player.StateController.ShootingState);
         }

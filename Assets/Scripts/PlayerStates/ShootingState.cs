@@ -12,13 +12,16 @@ public class ShootingState : IState
 
     public void Enter()
     {
-        PlayerBullet bullet = player.BulletPool.GetBullet();
-        bullet.InstantiateBullet(player.transform, player.BulletPool);
+        if (player.CanShoot)
+        {
+            player.BulletPool.GetBullet().InstantiateBullet(player.transform, player.BulletPool);
+            player.CounterForShoot = 0f;
+        }
     }
 
     public void Exit()
     {
-
+        player.CanShoot = false;
     }
 
     public void UpdateState()

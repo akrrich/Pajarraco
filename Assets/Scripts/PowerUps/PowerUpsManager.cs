@@ -6,8 +6,8 @@ public class PowerUpsManager : MonoBehaviour
 {
     private Stack<ICommand> commandPowerUpsStack = new Stack<ICommand>();
 
-    private Vector2 minSpawnRange = new Vector2(-7, 3.2f);
-    private Vector2 maxSpawnRange = new Vector2(7, 3.2f);
+    private Vector2 minSpawnRange = new Vector2(-7, 8.5f);
+    private Vector2 maxSpawnRange = new Vector2(7, 6f);
 
     private int numberToGuess;
 
@@ -15,11 +15,27 @@ public class PowerUpsManager : MonoBehaviour
     void Awake()
     {
         numberToGuess = Random.Range(0, 10001);
+
+        GameManager.Instance.GameStatePlaying += PowerUpsManagerUpdate;
     }
 
-    void Update()
+    void PowerUpsManagerUpdate()
     {
         InstantiateRandomPowerUpInRandomPosition();
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GameStatePlaying -= PowerUpsManagerUpdate;
+    }
+
+
+    public void AddPowerUp(ICommand command, float durationActualPowerUp)
+    {
+        command.Execute();
+        commandPowerUpsStack.Push(command);
+
+        StartCoroutine(HandlePowerUpDuration(command, durationActualPowerUp));
     }
 
 
@@ -39,15 +55,6 @@ public class PowerUpsManager : MonoBehaviour
 
             AbstractFactory.CreatePowerUp(Random.Range(0, 2), randomPosition);
         }
-    }
-
-
-    public void AddPowerUp(ICommand command, float durationActualPowerUp)
-    {
-        command.Execute();
-        commandPowerUpsStack.Push(command);
-
-        StartCoroutine(HandlePowerUpDuration(command, durationActualPowerUp));
     }
 
     private IEnumerator HandlePowerUpDuration(ICommand command, float durationActualPowerUp)
