@@ -7,7 +7,7 @@ public class BulletPool : MonoBehaviour
 
     private List<PlayerBullet> bulletPool = new List<PlayerBullet>();
 
-    private int initialPoolSize = 25;
+    private int initialPoolSize = 15;
     private int currentBulletIndex = 0;
 
 

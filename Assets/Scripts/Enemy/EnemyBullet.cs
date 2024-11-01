@@ -21,6 +21,15 @@ public class EnemyBullet : MonoBehaviour
 
         audioShoot.Play();
         rb.velocity = Vector2.down * speed;
+
+        GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateWin += StopPhysics;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateWin -= StopPhysics;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -35,8 +44,15 @@ public class EnemyBullet : MonoBehaviour
         }
     }
 
+
     public static void ApplyDamge(Player player)
     {
         player.Life -= damage;
+    }
+
+
+    private void StopPhysics()
+    {
+        Destroy(gameObject);
     }
 }

@@ -7,12 +7,16 @@ public class Enemy : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider2D;
+    private AudioSource[] enemySounds; // indice 0 = colision, indice 1 = muerte
 
     [SerializeField] private float leftLimit;
     [SerializeField] private float rightLimit;
 
     private int life = 10;
-    private int minLife = 1;
+    private int minLife = 0;
+    private int maxLife = 20;
 
     private float speed = 5f;
     private float counterForAttack = 0f;
@@ -21,15 +25,21 @@ public class Enemy : MonoBehaviour
     private bool movingRight = true;
 
     public int Life { get => life; set => life = value; }
+    public int MinLife { get => minLife; set => minLife = value; }
+    public int MaxLife { get => maxLife; set => maxLife = value; }
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        enemySounds = GetComponents<AudioSource>();
 
         GameManager.Instance.GameStatePlaying += UpdateEnemy;
         GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateWin += StopPhysics;
     }
 
     void UpdateEnemy()
@@ -44,13 +54,16 @@ public class Enemy : MonoBehaviour
     {
         GameManager.Instance.GameStatePlaying -= UpdateEnemy;
         GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateWin -= StopPhysics;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
             PlayerBullet.ApplyDamge(this);
+            EnemyEvents.OnEnemyLifeChange?.Invoke();
+            ManageSounds();
         }
     }
 
@@ -94,17 +107,33 @@ public class Enemy : MonoBehaviour
 
     private void CheckIfIsAlive()
     {
-        if (life < minLife)
+        if (life <= minLife)
         {
-            // condicion de derrota
+            EnemyEvents.OnEnemyDeath?.Invoke();
+
+            rb.isKinematic = true;
+            spriteRenderer.enabled = false;
+            boxCollider2D.enabled = false;
+
+            Destroy(gameObject, enemySounds[1].clip.length);
         }
     }
 
     private void StopPhysics()
     {
-        if (GameManager.Instance.GameState != GameState.Playing)
+        rb.velocity = Vector2.zero;
+    }
+
+    private void ManageSounds()
+    {
+        if (life > minLife)
         {
-            rb.velocity = Vector2.zero;
+            enemySounds[0].Play();
+        }
+
+        else
+        {
+            enemySounds[1].Play();
         }
     }
 }

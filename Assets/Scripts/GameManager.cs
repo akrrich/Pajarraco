@@ -16,12 +16,16 @@ public class GameManager : MonoBehaviour
 
     private event Action gameStatePlayin;
     private event Action gameStateLose;
+    private event Action gameStateWin;
+    private event Action gameStatePause;
 
     private GameState gameState;
     public GameState GameState { get => gameState; }
 
     public Action GameStatePlaying {  get => gameStatePlayin; set => gameStatePlayin = value; }
     public Action GameStateLose { get => gameStateLose; set => gameStateLose = value; }
+    public Action GameStateWin { get => gameStateWin; set => gameStateWin = value; }
+    public Action GameStatePause { get => gameStatePause; set => gameStatePause = value; }
 
 
 
@@ -59,12 +63,12 @@ public class GameManager : MonoBehaviour
                 gameStateLose?.Invoke();
             break;
 
-            case GameState.Win: 
-
+            case GameState.Win:
+                gameStateWin?.Invoke();
             break;
 
-            case GameState.Pause: 
-
+            case GameState.Pause:
+                gameStatePause?.Invoke();
             break;
         }
     }

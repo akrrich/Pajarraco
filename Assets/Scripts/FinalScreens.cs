@@ -6,36 +6,44 @@ public class FinalScreens : MonoBehaviour
 
     private Player player;
 
-    public AudioSource respawnSound;
+    private AudioSource buttonClick;
 
 
     void Start()
     {
         player = FindObjectOfType<Player>();
+        //buttonClick = GetComponent<AudioSource>();
 
         PlayerEvents.OnPlayerDefeated += ShowDefeatedScreen;
+        PlayerEvents.OnPlayerTotalDeath += ShowTotalDeathScreen;
 
-        respawnSound = GetComponent<AudioSource>();
+        EnemyEvents.OnEnemyDeath += ShowWinScreen;
     }
 
     void OnDestroy()
     {
         PlayerEvents.OnPlayerDefeated -= ShowDefeatedScreen;
+        PlayerEvents.OnPlayerTotalDeath -= ShowTotalDeathScreen;
+
+        EnemyEvents.OnEnemyDeath -= ShowWinScreen;
     }
 
 
     public void RespawnPlayerButton()
     {
+        //buttonClick.Play();
+
+        PlayerEvents.OnMementoLifeChange?.Invoke();
+
         PlayerEvents.OnPlayerRespawn += player.PlayerMemento.RestoreState;
         PlayerEvents.OnPlayerRespawn?.Invoke();
         PlayerEvents.OnPlayerRespawn -= player.PlayerMemento.RestoreState;
 
-        screens[1].SetActive(false);
+        screens[1].SetActive(false); 
 
         GameManager.Instance.ChangeStateTo(GameState.Playing);
-
-        respawnSound.Play(0);
     }
+
 
     private void ShowWinScreen()
     {
@@ -50,4 +58,11 @@ public class FinalScreens : MonoBehaviour
 
         screens[1].SetActive(true);
     } 
+
+    private void ShowTotalDeathScreen()
+    {
+        GameManager.Instance.ChangeStateTo(GameState.Lose);
+
+        screens[2].SetActive(true);
+    }
 }

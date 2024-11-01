@@ -7,26 +7,37 @@ public class PlayerBullet : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator shoot;
-    private SpriteRenderer sr;
+    private SpriteRenderer spriteRenderer;
     private CapsuleCollider2D capsule;
     private AudioSource audioShoot;
 
     private static int damage = 1;
 
     private float speed = 5f;
-    private float lifeTime = 3f;
 
     private Vector2 offsetBulletPosition = new Vector2(0, 0.8f);
 
     public static int Damage { get => damage; set => damage = value; }
 
 
+    void Start()
+    {
+        GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateWin += StopPhysics;
+    }
+
+    void OnDestroy()
+    {
+        GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateWin -= StopPhysics;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("PlayerBullet"))
         {
             rb.isKinematic = true;
-            sr.enabled = false;
+            spriteRenderer.enabled = false;
             capsule.enabled = false;
 
             StartCoroutine(ReturnToPoolAfterAudio());
@@ -37,7 +48,6 @@ public class PlayerBullet : MonoBehaviour
     public static void ApplyDamge(Enemy enemy)
     {
         enemy.Life -= damage;
-        Debug.Log(enemy);
     }
 
     public void InstantiateBullet(Transform playerPosition, BulletPool pool)
@@ -52,17 +62,22 @@ public class PlayerBullet : MonoBehaviour
     private void Initialize()
     {
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         capsule = GetComponent<CapsuleCollider2D>();
         audioShoot = GetComponent<AudioSource>();
 
         rb.isKinematic = false;
-        sr.enabled = true;
+        spriteRenderer.enabled = true;
         capsule.enabled = true;
 
         rb.velocity = Vector2.up * speed;
 
         audioShoot.Play();
+    }
+
+    private void StopPhysics()
+    {
+        ReturnToPool();
     }
 
     private IEnumerator ReturnToPoolAfterAudio()

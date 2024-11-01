@@ -10,18 +10,18 @@ public class PlayerLifes : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-        PlayerEvents.OnLifeChange += UpdateHearts;
+        PlayerEvents.OnMementoLifeChange += UpdateHearts;
     }
 
     void OnDestroy()
     {
-        PlayerEvents.OnLifeChange -= UpdateHearts;
+        PlayerEvents.OnMementoLifeChange -= UpdateHearts;
     }
 
 
     private void UpdateHearts()
     {
-        int currentLife = player.Life;
+        int currentLife = player.MementoLife;
 
         for (int i = 0; i < playerLifes.Length; i++)
         {
