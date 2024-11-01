@@ -25,6 +25,7 @@ public class PlayerMemento
     {
         player.PlayerAudios[2].Play();
         player.transform.position = position;
+        player.Life = life;
 
         player.EnabledOrDisablePlayer(RigidbodyType2D.Dynamic, true, true);
         coroutineStarter.StartCoroutine(BlinkEffect(durationBlinkEffect, intervalBlinkEffect));

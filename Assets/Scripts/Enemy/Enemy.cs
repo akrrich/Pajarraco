@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float leftLimit;
     [SerializeField] private float rightLimit;
 
-    private int life = 10;
+    private int life = 20;
     private int minLife = 0;
     private int maxLife = 20;
 
