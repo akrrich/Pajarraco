@@ -13,11 +13,11 @@ public class PlayerBullet : MonoBehaviour
 
     private static int damage = 1;
 
-    private float speed = 5f;
+    private static float speed = 6f;
 
     private Vector2 offsetBulletPosition = new Vector2(0, 0.8f);
 
-    public static int Damage { get => damage; set => damage = value; }
+    public static float Speed { get => speed; set => speed = value; }
 
 
     void Start()
@@ -34,14 +34,11 @@ public class PlayerBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("PlayerBullet"))
-        {
-            rb.isKinematic = true;
-            spriteRenderer.enabled = false;
-            capsule.enabled = false;
+        rb.isKinematic = true;
+        spriteRenderer.enabled = false;
+        capsule.enabled = false;
 
-            StartCoroutine(ReturnToPoolAfterAudio());
-        }
+        StartCoroutine(ReturnToPoolAfterAudio());
     }
 
 

@@ -6,7 +6,7 @@ public abstract class PowerUps : MonoBehaviour
     protected PowerUpsManager powerUpsManager;
 
     private SpriteRenderer sr;
-    private BoxCollider2D box;
+    private CircleCollider2D circleCollider2D;
     private AudioSource powerUpPick;
 
     [SerializeField] private int id;
@@ -22,7 +22,7 @@ public abstract class PowerUps : MonoBehaviour
         powerUpsManager = FindObjectOfType<PowerUpsManager>();
 
         sr = GetComponent<SpriteRenderer>();
-        box = GetComponent<BoxCollider2D>();
+        circleCollider2D = GetComponent<CircleCollider2D>();
         powerUpPick = GetComponent<AudioSource>();
 
         GameManager.Instance.GameStatePlaying += UpdatePowerUp;
@@ -69,7 +69,7 @@ public abstract class PowerUps : MonoBehaviour
     private void DestroyPowerUp()
     {
         sr.enabled = false;
-        box.enabled = false;
+        circleCollider2D.enabled = false;
 
         Destroy(gameObject, powerUpPick.clip.length);
     }

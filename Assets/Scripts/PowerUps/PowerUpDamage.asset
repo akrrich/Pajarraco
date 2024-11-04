@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: PowerUpDamage
   m_EditorClassIdentifier: 
   durationTimePowerUp: 5
-  limitDownPowerUp: -3.725

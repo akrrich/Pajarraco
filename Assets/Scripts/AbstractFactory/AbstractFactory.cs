@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AbstractFactory : MonoBehaviour
 {
-    [SerializeField] private PowerUps[] powerUps;
+    [SerializeField] private PowerUps[] powerUps; 
     private static Dictionary<int, PowerUps> idPowerUps = new Dictionary<int, PowerUps>();
 
 

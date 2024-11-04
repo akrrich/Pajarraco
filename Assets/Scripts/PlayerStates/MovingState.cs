@@ -14,12 +14,12 @@ public class MovingState : IState
     {
         if (!player.ChangeSpeedForPowerUp)
         {
-            player.Speed = 5f;
+            player.Speed = 8f;
         }
 
         else
         {
-            player.Speed = 8f;
+            player.Speed = 10.5f;
         }
     }
 

@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: PowerUpSpeed
   m_EditorClassIdentifier: 
   durationTimePowerUp: 10
-  limitDownPowerUp: -3.725

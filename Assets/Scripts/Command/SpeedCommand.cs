@@ -11,12 +11,12 @@ public class SpeedCommand : ICommand
     public void Execute()
     {
         player.ChangeSpeedForPowerUp = true;
-        player.Speed = 8f;
+        player.Speed = 10.5f;
     }
 
     public void Undo()
     {
         player.ChangeSpeedForPowerUp = false;
-        player.Speed = 5f;
+        player.Speed = 8;
     }
 }

@@ -9,11 +9,13 @@ public class DamageCommand : ICommand
 
     public void Execute()
     {
-        player.TimeToWaitForShoot = 0.15f;
+        player.TimeToWaitForShoot = 0.25f;
+        PlayerBullet.Speed = 8f;
     }
 
     public void Undo()
     {
-        player.TimeToWaitForShoot = 0.3f;
+        player.TimeToWaitForShoot = 0.5f;
+        PlayerBullet.Speed = 6f;
     }
 }

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private float speed = 8f;
     private float counterForShoot = 0f;
-    private float timeToWaitForShoot = 0.3f;
+    private float timeToWaitForShoot = 0.5f;
 
     private float horizontalInput;
 

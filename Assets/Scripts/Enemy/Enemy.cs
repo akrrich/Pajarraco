@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     private int minLife = 0;
     private int maxLife = 20;
 
-    private float speed = 5f;
+    private float speed = 7.5f;
     private float counterForAttack = 0f;
     private float attackSeconds = 2f;
 
@@ -63,7 +63,9 @@ public class Enemy : MonoBehaviour
         {
             PlayerBullet.ApplyDamge(this);
             EnemyEvents.OnEnemyLifeChange?.Invoke();
+
             ManageSounds();
+            IncreaseDifficulty();
         }
     }
 
@@ -97,6 +99,11 @@ public class Enemy : MonoBehaviour
     private void Attack()
     {
         counterForAttack += Time.deltaTime;
+
+        if (life < maxLife / 2)
+        {
+            attackSeconds = 1.25f;
+        }
 
         if (counterForAttack >= attackSeconds)
         {
@@ -135,5 +142,13 @@ public class Enemy : MonoBehaviour
         {
             enemySounds[1].Play();
         }
+    }
+
+    private void IncreaseDifficulty()
+    {
+        float speedEnhancer = 0.3f;
+        speed += speedEnhancer;
+
+        enemyBullet.IncreaseSpeed();
     }
 }
