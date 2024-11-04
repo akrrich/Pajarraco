@@ -16,11 +16,6 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get => instance; }
 
-    [SerializeField] private Texture2D customCursorTexture;
-    private Texture2D defaultCursorTexture;
-
-    private Vector2 cursorHotsSpot;
-
     private event Action gameStatePlayin;
     private event Action gameStateLose;
     private event Action gameStateWin;
@@ -33,10 +28,6 @@ public class GameManager : MonoBehaviour
     public Action GameStateLose { get => gameStateLose; set => gameStateLose = value; }
     public Action GameStateWin { get => gameStateWin; set => gameStateWin = value; }
     public Action GameStatePause { get => gameStatePause; set => gameStatePause = value; }
-
-    public Texture2D CustomCursorTexture { get => customCursorTexture; set => customCursorTexture = value; }
-    public Texture2D DefaultCursorTexture { get => defaultCursorTexture; set => defaultCursorTexture = value; }
-    public Vector2 CursorHotsSpot { get => cursorHotsSpot; }
 
 
     void Awake()
@@ -57,7 +48,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        cursorHotsSpot = new Vector2(Instance.CustomCursorTexture.width / 2, Instance.CustomCursorTexture.height / 2);
         gameState = GameState.Menu;
         CursorController(true);
     }
@@ -65,8 +55,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        print(gameState);
-
         switch (gameState)
         {
             case GameState.Menu:

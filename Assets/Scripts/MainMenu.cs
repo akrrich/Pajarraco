@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class MainMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MainMenu : MonoBehaviour
 {
     private AudioSource clickSound;
 
@@ -38,16 +38,5 @@ public class MainMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         clickSound.Play();
         yield return new WaitForSeconds(clickSound.clip.length);
         Application.Quit();
-    }
-
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Cursor.SetCursor(GameManager.Instance.CustomCursorTexture, GameManager.Instance.CursorHotsSpot, CursorMode.Auto);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Cursor.SetCursor(GameManager.Instance.DefaultCursorTexture, Vector2.zero, CursorMode.Auto);
     }
 }
