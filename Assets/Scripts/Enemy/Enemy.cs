@@ -75,11 +75,14 @@ public class Enemy : MonoBehaviour
         if (movingRight)
         {
             rb.velocity = new Vector2(speed, 0);
+            spriteRenderer.flipX = true;
+
         }
 
         else
         {
             rb.velocity = new Vector2(-speed,0);
+            spriteRenderer.flipX = false;
         }
     }
 
@@ -129,6 +132,9 @@ public class Enemy : MonoBehaviour
     private void StopPhysics()
     {
         rb.velocity = Vector2.zero;
+        spriteRenderer.flipX = false;
+
+
     }
 
     private void ManageSounds()

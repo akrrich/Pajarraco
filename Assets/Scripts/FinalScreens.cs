@@ -34,13 +34,16 @@ public class FinalScreens : MonoBehaviour
 
     public void RespawnPlayerButton()
     {
+       
         clickSound.Play();
+        
 
         PlayerEvents.OnMementoLifeChange?.Invoke();
 
         PlayerEvents.OnPlayerRespawn += player.PlayerMemento.RestoreState;
         PlayerEvents.OnPlayerRespawn?.Invoke();
         PlayerEvents.OnPlayerRespawn -= player.PlayerMemento.RestoreState;
+        player.PlayerAudios[2].Play();
 
         screens[1].SetActive(false); 
 

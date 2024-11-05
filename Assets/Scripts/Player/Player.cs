@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
             EnemyBullet.ApplyDamge(this);
             PlayerEvents.OnLifeChange?.Invoke();
             ManageSounds();
+
         }
     }
 
