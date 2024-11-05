@@ -80,7 +80,6 @@ public class Player : MonoBehaviour
             EnemyBullet.ApplyDamge(this);
             PlayerEvents.OnLifeChange?.Invoke();
             ManageSounds();
-
         }
     }
 
@@ -149,7 +148,7 @@ public class Player : MonoBehaviour
             playerAudios[0].Play();
         }
 
-        else
+        else if (mementoLife > minLife)
         {
             playerAudios[1].Play();
         }

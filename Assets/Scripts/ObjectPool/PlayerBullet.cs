@@ -22,13 +22,13 @@ public class PlayerBullet : MonoBehaviour
 
     void Start()
     {
-        GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateDefeated += StopPhysics;
         GameManager.Instance.GameStateWin += StopPhysics;
     }
 
     void OnDestroy()
     {
-        GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateDefeated -= StopPhysics;
         GameManager.Instance.GameStateWin -= StopPhysics;
     }
 

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.EventSystems;
 
 public class MainMenu : MonoBehaviour
 {
@@ -23,6 +22,12 @@ public class MainMenu : MonoBehaviour
     public void ButtonCloseGame()
     {
         StartCoroutine(CloseGameAfterSound());
+    }
+
+    public void ButtonCredits()
+    {
+        GameManager.Instance.ChangeStateTo(GameState.Credits);
+        StartCoroutine(ChangeSceneAfterSound("Credits"));
     }
 
 

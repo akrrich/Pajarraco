@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using UnityEngine.EventSystems;
 
 public class FinalScreens : MonoBehaviour
 {
     [SerializeField] private GameObject[] screens;
 
     private Player player;
+    private Enemy enemy;
 
     private AudioSource clickSound;
 
@@ -15,6 +15,7 @@ public class FinalScreens : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<Player>();
+        enemy = FindObjectOfType<Enemy>();
         clickSound = GetComponent<AudioSource>();
 
         PlayerEvents.OnPlayerDefeated += ShowDefeatedScreen;
@@ -34,16 +35,15 @@ public class FinalScreens : MonoBehaviour
 
     public void RespawnPlayerButton()
     {
-       
-        clickSound.Play();
-        
+        Time.timeScale = 0f;
+
+        clickSound.Play();   
 
         PlayerEvents.OnMementoLifeChange?.Invoke();
 
         PlayerEvents.OnPlayerRespawn += player.PlayerMemento.RestoreState;
         PlayerEvents.OnPlayerRespawn?.Invoke();
         PlayerEvents.OnPlayerRespawn -= player.PlayerMemento.RestoreState;
-        player.PlayerAudios[2].Play();
 
         screens[1].SetActive(false); 
 
@@ -82,13 +82,13 @@ public class FinalScreens : MonoBehaviour
 
     private void ShowDefeatedScreen()
     {
-        GameManager.Instance.ChangeStateTo(GameState.Lose);
+        GameManager.Instance.ChangeStateTo(GameState.Defeated);
         screens[1].SetActive(true);
     } 
 
     private void ShowTotalDeathScreen()
     {
-        GameManager.Instance.ChangeStateTo(GameState.Lose);
+        GameManager.Instance.ChangeStateTo(GameState.TotalDefeated);
         screens[2].SetActive(true);
     }
 

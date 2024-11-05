@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     public int Life { get => life; set => life = value; }
     public int MinLife { get => minLife; set => minLife = value; }
     public int MaxLife { get => maxLife; set => maxLife = value; }
+    public float Speed { get => speed; set => speed = value; }  
 
 
     void Start()
@@ -38,7 +39,7 @@ public class Enemy : MonoBehaviour
         enemySounds = GetComponents<AudioSource>();
 
         GameManager.Instance.GameStatePlaying += UpdateEnemy;
-        GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateDefeated += StopPhysics;
         GameManager.Instance.GameStateWin += StopPhysics;
     }
 
@@ -53,7 +54,7 @@ public class Enemy : MonoBehaviour
     void OnDestroy()
     {
         GameManager.Instance.GameStatePlaying -= UpdateEnemy;
-        GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateDefeated -= StopPhysics;
         GameManager.Instance.GameStateWin -= StopPhysics;
     }
 
@@ -76,7 +77,6 @@ public class Enemy : MonoBehaviour
         {
             rb.velocity = new Vector2(speed, 0);
             spriteRenderer.flipX = true;
-
         }
 
         else
@@ -132,9 +132,6 @@ public class Enemy : MonoBehaviour
     private void StopPhysics()
     {
         rb.velocity = Vector2.zero;
-        spriteRenderer.flipX = false;
-
-
     }
 
     private void ManageSounds()

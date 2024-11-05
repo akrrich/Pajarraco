@@ -23,13 +23,13 @@ public class EnemyBullet : MonoBehaviour
         audioShoot.Play();
         rb.velocity = Vector2.down * speed;
 
-        GameManager.Instance.GameStateLose += StopPhysics;
+        GameManager.Instance.GameStateDefeated += StopPhysics;
         GameManager.Instance.GameStateWin += StopPhysics;
     }
 
     void OnDestroy()
     {
-        GameManager.Instance.GameStateLose -= StopPhysics;
+        GameManager.Instance.GameStateDefeated -= StopPhysics;
         GameManager.Instance.GameStateWin -= StopPhysics;
 
         speed = 7f;

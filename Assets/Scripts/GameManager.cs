@@ -6,7 +6,8 @@ public enum GameState
     Menu,
     Playing,
     Win,
-    Lose,
+    Defeated,
+    TotalDefeated,
     Pause,
     Credits
 }
@@ -16,18 +17,24 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get => instance; }
 
+    private event Action gameStateMenu;
     private event Action gameStatePlayin;
-    private event Action gameStateLose;
+    private event Action gameStateDefeated;
+    private event Action gameStateTotalDefeated;
     private event Action gameStateWin;
     private event Action gameStatePause;
+    private event Action gameStateCredits;
 
     private GameState gameState;
     public GameState GameState { get => gameState; }
 
+    public Action GameStateMenu { get => gameStateMenu; set => gameStateMenu = value; }
     public Action GameStatePlaying {  get => gameStatePlayin; set => gameStatePlayin = value; }
-    public Action GameStateLose { get => gameStateLose; set => gameStateLose = value; }
+    public Action GameStateDefeated { get => gameStateDefeated; set => gameStateDefeated = value; }
+    public Action GameStateTotalDefeated { get => gameStateTotalDefeated; set => gameStateTotalDefeated = value; }
     public Action GameStateWin { get => gameStateWin; set => gameStateWin = value; }
     public Action GameStatePause { get => gameStatePause; set => gameStatePause = value; }
+    public Action GameStateCredits { get => gameStateCredits; set => gameStateCredits = value; }
 
 
     void Awake()
@@ -49,42 +56,16 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = GameState.Menu;
-        CursorController(true);
+        Cursor.visible = true;
     }
 
 
     void Update()
     {
-        switch (gameState)
-        {
-            case GameState.Menu:
-                CursorController(true); 
-            break;
+        CheckCurrentState();
 
-            case GameState.Playing:
-                gameStatePlayin?.Invoke();
-                CursorController(false);
-            break;
-
-            case GameState.Lose:
-                gameStateLose?.Invoke();
-                CursorController(true);
-            break;
-
-            case GameState.Win:
-                gameStateWin?.Invoke();
-                CursorController(true);
-            break;
-
-            case GameState.Credits:
-                CursorController(true);
-            break;
-
-            case GameState.Pause:
-                gameStatePause?.Invoke();
-                CursorController(true);
-            break;
-        }
+        TimeScaleMode();
+        CursorController();
     }
 
 
@@ -94,8 +75,64 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void CursorController(bool cursorVisible)
+    private void CheckCurrentState()
     {
-        Cursor.visible = cursorVisible;
+        switch (gameState)
+        {
+            case GameState.Menu:
+                gameStateMenu?.Invoke();
+                break;
+
+            case GameState.Playing:
+                gameStatePlayin?.Invoke();
+                break;
+
+            case GameState.Defeated:
+                gameStateDefeated?.Invoke();
+                break;
+
+            case GameState.TotalDefeated:
+                gameStateTotalDefeated?.Invoke();
+                break;
+
+            case GameState.Win:
+                gameStateWin?.Invoke();
+                break;
+
+            case GameState.Credits:
+                gameStateCredits?.Invoke();
+                break;
+
+            case GameState.Pause:
+                gameStatePause?.Invoke();
+                break;
+        }
+    }
+
+    private void CursorController()
+    {
+        if (gameState != GameState.Playing)
+        {
+            Cursor.visible = true;
+        }
+
+        else
+        {
+            Cursor.visible = false;
+        }
+    }
+
+    // Metodo provisorio
+    private void TimeScaleMode()
+    {
+        if (gameState != GameState.Defeated)
+        {
+            Time.timeScale = 1f;
+        }
+
+        else
+        {
+            Time.timeScale = 0f;
+        }
     }
 }
