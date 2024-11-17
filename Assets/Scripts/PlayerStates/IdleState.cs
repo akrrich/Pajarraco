@@ -31,5 +31,10 @@ public class IdleState : IState
         {
             player.StateController.TransitionTo(player.StateController.ShootingState);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded)
+        {
+            player.StateController.TransitionTo(player.StateController.JumpingState);
+        }
     }
 }

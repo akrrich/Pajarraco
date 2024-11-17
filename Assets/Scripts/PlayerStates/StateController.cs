@@ -1,15 +1,16 @@
 public class StateController
 {
     private IState currentState;
-    public IState CurrentState { get => currentState; }
 
     private IdleState idleState;
     private MovingState movingState;
     private ShootingState shootingState;
+    private JumpingState jumpingState;
 
     public IdleState IdleState { get => idleState; }
     public MovingState MovingState { get => movingState; }
     public ShootingState ShootingState { get => shootingState; }
+    public JumpingState JumpingState { get => jumpingState; }
 
 
     public StateController(Player player)
@@ -17,6 +18,7 @@ public class StateController
         idleState = new IdleState(player);
         movingState = new MovingState(player);
         shootingState = new ShootingState(player);
+        jumpingState = new JumpingState(player);
     }
 
     public void InitializeState(IState state)

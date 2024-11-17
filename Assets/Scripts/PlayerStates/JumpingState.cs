@@ -1,26 +1,20 @@
 using UnityEngine;
 
-public class MovingState : IState
+public class JumpingState : IState
 {
     private Player player;
 
-    public MovingState(Player player)
-    {
+    public JumpingState(Player player) 
+    { 
         this.player = player;
-    }
+    }  
 
 
     public void Enter()
     {
-        if (!player.ChangeSpeedForPowerUp)
-        {
-            player.Speed = 8f;
-        }
-
-        else
-        {
-            player.Speed = 10.5f;
-        }
+        player.IsGrounded = false;
+        player.PlayerAudios[3].Play();
+        player.Rb.AddForce(Vector2.up * player.JumpForce, ForceMode2D.Impulse);
     }
 
     public void Exit()
@@ -30,6 +24,11 @@ public class MovingState : IState
 
     public void UpdateState()
     {
+        if (Mathf.Abs(player.Rb.velocity.x) >= 0.1f)
+        {
+            player.StateController.TransitionTo(player.StateController.MovingState);
+        }
+
         if (Mathf.Abs(player.Rb.velocity.x) == 0f && Mathf.Abs(player.Rb.velocity.y) == 0f)
         {
             player.StateController.TransitionTo(player.StateController.IdleState);
@@ -38,11 +37,6 @@ public class MovingState : IState
         if (Input.GetButtonDown("Fire1"))
         {
             player.StateController.TransitionTo(player.StateController.ShootingState);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded)
-        {
-            player.StateController.TransitionTo(player.StateController.JumpingState);
         }
     }
 }

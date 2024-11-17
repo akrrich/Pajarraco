@@ -26,7 +26,14 @@ public class ShootingState : IState
 
     public void UpdateState()
     {
-        if (Mathf.Abs(player.Rb.velocity.x) == 0f)
+        // chequear este error
+        /*if (!player.IsGrounded && Input.GetButtonDown("Fire1"))
+        {
+            Enter();
+            Exit();
+        }*/
+
+        if (Mathf.Abs(player.Rb.velocity.x) == 0f && Mathf.Abs(player.Rb.velocity.y) == 0f)
         {
             player.StateController.TransitionTo(player.StateController.IdleState);
         }
@@ -34,6 +41,11 @@ public class ShootingState : IState
         if (Mathf.Abs(player.Rb.velocity.x) >= 0.1f)
         {
             player.StateController.TransitionTo(player.StateController.MovingState);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded)
+        {
+            player.StateController.TransitionTo(player.StateController.JumpingState);
         }
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,11 +7,13 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private BoxCollider2D boxCollider2D;
-    private AudioSource[] playerAudios; // indice 0 = colision, indice 1 = muerte, indice 2 = respawn, que ya esta
+    private AudioSource[] playerAudios; // indice 0 = colision, indice 1 = muerte, indice 2 = respawn, indice 3 = salto,
     private SpriteRenderer spriteRenderer;
     private BulletPool bulletPool;
     private StateController stateController;
     private PlayerMemento playerMemento;
+
+    private Queue<Action> jumpQueue = new Queue<Action>();
 
     private int mementoLife = 3;
     private int mementoMinLife = 0;
@@ -18,6 +22,7 @@ public class Player : MonoBehaviour
     private int minLife = 0;
     private int maxLife = 3;
 
+    private float jumpForce = 6f;
     private float speed = 8f;
     private float counterForShoot = 0f;
     private float timeToWaitForShoot = 0.5f;
@@ -25,6 +30,7 @@ public class Player : MonoBehaviour
     private float horizontalInput;
 
     private bool canShoot = true;
+    private bool isGrounded = true;
     private bool changeSpeedForPowerUp = false;
 
     public Rigidbody2D Rb { get => rb; }
@@ -38,11 +44,13 @@ public class Player : MonoBehaviour
     public int Life { get => life; set => life = value; }   
     public int MinLife { get => minLife; set => minLife = value; }  
     public int MaxLife { get => maxLife; set => maxLife = value; }
+    public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public float Speed { get => speed; set => speed = value; }
     public float CounterForShoot { set => counterForShoot = value; }   
     public float TimeToWaitForShoot { get => timeToWaitForShoot; set => timeToWaitForShoot = value; }
     public bool ChangeSpeedForPowerUp { get => changeSpeedForPowerUp; set => changeSpeedForPowerUp = value; }
     public bool CanShoot { get => canShoot; set => canShoot = value; }
+    public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
 
 
     void Start()
@@ -62,6 +70,7 @@ public class Player : MonoBehaviour
 
     void UpdatePlayer()
     {
+        EnqueueJump();
         stateController.UpdateState();
         CheckIfIsAlive();
         PlayerMovement();
@@ -80,6 +89,12 @@ public class Player : MonoBehaviour
             EnemyBullet.ApplyDamge(this);
             PlayerEvents.OnLifeChange?.Invoke();
             ManageSounds();
+        }
+
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            isGrounded = true;
+            ProcessPendingJumps();
         }
     }
 
@@ -151,6 +166,22 @@ public class Player : MonoBehaviour
         else if (mementoLife > minLife)
         {
             playerAudios[1].Play();
+        }
+    }
+
+    private void EnqueueJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && !isGrounded && jumpQueue.Count < 1)
+        {
+            jumpQueue.Enqueue(() => stateController.JumpingState.Enter());
+        }
+    }
+
+    private void ProcessPendingJumps()
+    {
+        while (jumpQueue.Count > 0)
+        {
+            jumpQueue.Dequeue().Invoke();
         }
     }
 }
