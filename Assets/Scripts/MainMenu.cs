@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private Button[] buttons;
     private AudioSource clickSound;
 
 
@@ -16,7 +18,7 @@ public class MainMenu : MonoBehaviour
     public void ButtonStartGame()
     {
         GameManager.Instance.ChangeStateTo(GameState.Playing);
-        StartCoroutine(ChangeSceneAfterSound("Level"));
+        StartCoroutine(ChangeSceneAfterSound("Level", 0));
     }
 
     public void ButtonCloseGame()
@@ -27,13 +29,14 @@ public class MainMenu : MonoBehaviour
     public void ButtonCredits()
     {
         GameManager.Instance.ChangeStateTo(GameState.Credits);
-        StartCoroutine(ChangeSceneAfterSound("Credits"));
+        StartCoroutine(ChangeSceneAfterSound("Credits", 2));
     }
 
 
-    private IEnumerator ChangeSceneAfterSound(string nameScene)
+    private IEnumerator ChangeSceneAfterSound(string nameScene, int indexButton)
     {
         clickSound.Play();
+        buttons[indexButton].interactable = false;
         yield return new WaitForSeconds(clickSound.clip.length);
         SceneManager.LoadScene(nameScene);
     }
@@ -41,6 +44,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator CloseGameAfterSound()
     {
         clickSound.Play();
+        buttons[3].interactable = false;
         yield return new WaitForSeconds(clickSound.clip.length);
         Application.Quit();
     }

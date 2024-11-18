@@ -58,19 +58,28 @@ public class FinalScreens : MonoBehaviour
         EnemyEvents.OnEnemyDeath -= ShowWinScreen;
 
         StartCoroutine(ChangeSceneAfterSound("Level"));
+
         GameManager.Instance.ChangeStateTo(GameState.Playing);
+        MusicManager.Instance.RestarBooleanVlues();
+        EnemyBullet.RestartSpeedValue();
     }
 
     public void ReturnToMenuButton()
     {
         StartCoroutine(ChangeSceneAfterSound("Menu"));
+
         GameManager.Instance.ChangeStateTo(GameState.Menu);
+        MusicManager.Instance.RestarBooleanVlues();
+        EnemyBullet.RestartSpeedValue();
     }
 
     public void CreditsButton()
     {
         StartCoroutine(ChangeSceneAfterSound("Credits"));
+
         GameManager.Instance.ChangeStateTo(GameState.Credits);
+        MusicManager.Instance.RestarBooleanVlues();
+        EnemyBullet.RestartSpeedValue();
     }
 
 

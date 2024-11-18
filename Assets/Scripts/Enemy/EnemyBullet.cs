@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
@@ -31,8 +32,6 @@ public class EnemyBullet : MonoBehaviour
     {
         GameManager.Instance.GameStateDefeated -= StopPhysics;
         GameManager.Instance.GameStateWin -= StopPhysics;
-
-        speed = 7f;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -40,10 +39,15 @@ public class EnemyBullet : MonoBehaviour
         CheckAllCollision(collision);
     }
 
-
+    
     public static void ApplyDamge(Player player)
     {
         player.Life -= damage;
+    }
+
+    public static void RestartSpeedValue()
+    {
+        speed = 7f;
     }
 
     public void IncreaseSpeed()
@@ -64,17 +68,17 @@ public class EnemyBullet : MonoBehaviour
         {
             case "Player":
                 Destroy(gameObject);
-            break;
+                break;
 
             case "Floor":
                 rb.velocity = Vector2.zero;
                 StartCoroutine(FadeOutSprite());
-            break;
+                break;
 
             case "EnemyBullet":
                 Destroy(gameObject);
                 Destroy(collision.gameObject);
-            break;
+                break;
         }
     }
 

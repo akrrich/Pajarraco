@@ -84,18 +84,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            EnemyBullet.ApplyDamge(this);
-            PlayerEvents.OnLifeChange?.Invoke();
-            ManageSounds();
-        }
-
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            isGrounded = true;
-            ProcessPendingJumps();
-        }
+        CheckAllCollision(collision);
     }
 
 
@@ -104,6 +93,24 @@ public class Player : MonoBehaviour
         rb.bodyType = rbType;
         this.spriteRenderer.enabled = spriteRenderer;
         this.boxCollider2D.enabled = boxCollider2D;
+    }
+
+
+    private void CheckAllCollision(Collision2D collision)
+    {
+        switch (collision.gameObject.tag)
+        {
+            case "EnemyBullet":
+                EnemyBullet.ApplyDamge(this);
+                PlayerEvents.OnLifeChange?.Invoke();
+                ManageSounds();
+                break;
+
+            case "Floor":
+                isGrounded = true;
+                ProcessPendingJumps();
+                break;
+        }
     }
 
 

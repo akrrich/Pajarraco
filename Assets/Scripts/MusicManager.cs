@@ -9,7 +9,7 @@ public class MusicManager : MonoBehaviour
 
     private int currentMusicIndex = -1;
 
-    private bool[] musicBooleansActive = { false, false, false, false, false };
+    private bool[] hasPlayedOnce = { false, false, false, false, false };
 
 
     void Awake()
@@ -39,6 +39,16 @@ public class MusicManager : MonoBehaviour
         GameManager.Instance.GameStateCredits += () => PlayMusic(4);
     }
 
+
+    public void RestarBooleanVlues()
+    {
+        for (int i = 0; i < hasPlayedOnce.Length; i++)
+        {
+            hasPlayedOnce[i] = false;
+        }
+    }
+
+
     private void PlayMusic(int musicIndex)
     {
         if (currentMusicIndex == musicIndex && musicsManager[musicIndex].isPlaying)
@@ -46,12 +56,24 @@ public class MusicManager : MonoBehaviour
             return;
         }
 
-        StopAllMusic();
+        if ((musicIndex == 2 || musicIndex == 3) && !hasPlayedOnce[musicIndex])
+        {
+            StopAllMusic();
+            musicsManager[musicIndex].playOnAwake = true;
+            musicsManager[musicIndex].loop = false;
+            musicsManager[musicIndex].Play();
+            currentMusicIndex = musicIndex;
+            hasPlayedOnce[musicIndex] = true; 
+        }
 
-        musicsManager[musicIndex].playOnAwake = true;
-        musicsManager[musicIndex].loop = (musicIndex != 2 && musicIndex != 3);
-        musicsManager[musicIndex].Play();
-        currentMusicIndex = musicIndex;
+        else if (musicIndex != 2 && musicIndex != 3)
+        {
+            StopAllMusic();
+            musicsManager[musicIndex].playOnAwake = true;
+            musicsManager[musicIndex].loop = (musicIndex != 2 && musicIndex != 3);
+            musicsManager[musicIndex].Play();
+            currentMusicIndex = musicIndex;
+        }
     }
 
     private void StopAllMusic()
@@ -61,7 +83,6 @@ public class MusicManager : MonoBehaviour
             if (musicsManager[i].isPlaying)
             {
                 musicsManager[i].Stop();
-                musicBooleansActive[i] = false;
             }
         }
     }

@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     public static GameManager Instance { get => instance; }
 
+    private UpdateManager updateManager = new UpdateManager();
+
+
     private event Action gameStateMenu;
     private event Action gameStatePlayin;
     private event Action gameStateDefeated;
@@ -56,83 +59,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = GameState.Menu;
-        Cursor.visible = true;
     }
 
 
     void Update()
     {
-        CheckCurrentState();
-
-        TimeScaleMode();
-        CursorController();
+        updateManager.UpdateAllGame(gameState);
     }
 
 
     public void ChangeStateTo(GameState newState)
     {
         gameState = newState;
-    }
-
-
-    private void CheckCurrentState()
-    {
-        switch (gameState)
-        {
-            case GameState.Menu:
-                gameStateMenu?.Invoke();
-                break;
-
-            case GameState.Playing:
-                gameStatePlayin?.Invoke();
-                break;
-
-            case GameState.Defeated:
-                gameStateDefeated?.Invoke();
-                break;
-
-            case GameState.TotalDefeated:
-                gameStateTotalDefeated?.Invoke();
-                break;
-
-            case GameState.Win:
-                gameStateWin?.Invoke();
-                break;
-
-            case GameState.Credits:
-                gameStateCredits?.Invoke();
-                break;
-
-            case GameState.Pause:
-                gameStatePause?.Invoke();
-                break;
-        }
-    }
-
-    private void CursorController()
-    {
-        if (gameState != GameState.Playing)
-        {
-            Cursor.visible = true;
-        }
-
-        else
-        {
-            Cursor.visible = false;
-        }
-    }
-
-    // Metodo provisorio
-    private void TimeScaleMode()
-    {
-        if (gameState != GameState.Defeated)
-        {
-            Time.timeScale = 1f;
-        }
-
-        else
-        {
-            Time.timeScale = 0f;
-        }
     }
 }

@@ -13,7 +13,6 @@ public abstract class PowerUps : MonoBehaviour
 
     public int Id { get => id; }
 
-
     private bool canMovePowerUp = true;
 
 
@@ -32,6 +31,7 @@ public abstract class PowerUps : MonoBehaviour
     {
         MovePowerUp();
         StopPowerUp();
+        DestroyPowerUp(canMovePowerUp);
     }
 
     void OnDestroy()
@@ -72,6 +72,14 @@ public abstract class PowerUps : MonoBehaviour
         circleCollider2D.enabled = false;
 
         Destroy(gameObject, powerUpPick.clip.length);
+    }
+
+    private void DestroyPowerUp(bool canMovePowerUp)
+    {
+        if (!canMovePowerUp)
+        {
+            Destroy(gameObject, powerUpScriptable.LifeTime);
+        }
     }
 
 
