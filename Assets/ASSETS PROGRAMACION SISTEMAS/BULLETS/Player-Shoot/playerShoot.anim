@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fireball_Animation
+  m_Name: playerShoot
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -20,14 +20,14 @@ AnimationClip:
   m_PPtrCurves:
   - serializedVersion: 2
     curve:
-    - time: 0
-      value: {fileID: 21300000, guid: 8615bf84e9a5a13428ae6275a562a853, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 2b02c5e3379f6444f8166205160b9e09, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: a74da400f08b35d489c837658f327fe1, type: 3}
+      value: {fileID: 21300000, guid: e1ae16f22a84c5249a6c734d00b55333, type: 3}
     - time: 0.5833333
-      value: {fileID: 21300000, guid: 486879228a060ff43b93b20c2a5b05f3, type: 3}
+      value: {fileID: 21300000, guid: b923d9dc483ca5c449c9f0a3fd79bfd8, type: 3}
     - time: 0.8333333
-      value: {fileID: 21300000, guid: 4c4718430ae3993409360a5474573c91, type: 3}
+      value: {fileID: 21300000, guid: 4293e13a7b4a2cc468580195d393ff91, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,10 +50,10 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 8615bf84e9a5a13428ae6275a562a853, type: 3}
-    - {fileID: 21300000, guid: a74da400f08b35d489c837658f327fe1, type: 3}
-    - {fileID: 21300000, guid: 486879228a060ff43b93b20c2a5b05f3, type: 3}
-    - {fileID: 21300000, guid: 4c4718430ae3993409360a5474573c91, type: 3}
+    - {fileID: 21300000, guid: 2b02c5e3379f6444f8166205160b9e09, type: 3}
+    - {fileID: 21300000, guid: e1ae16f22a84c5249a6c734d00b55333, type: 3}
+    - {fileID: 21300000, guid: b923d9dc483ca5c449c9f0a3fd79bfd8, type: 3}
+    - {fileID: 21300000, guid: 4293e13a7b4a2cc468580195d393ff91, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
