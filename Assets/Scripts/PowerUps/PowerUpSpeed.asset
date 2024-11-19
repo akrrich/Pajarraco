@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8699f1fed8bcc488b0761903c0cfab, type: 3}
   m_Name: PowerUpSpeed
   m_EditorClassIdentifier: 
-  durationTimePowerUp: 10
+  durationTimePowerUp: 7.5

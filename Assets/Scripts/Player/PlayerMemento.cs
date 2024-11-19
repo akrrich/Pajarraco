@@ -26,6 +26,7 @@ public class PlayerMemento
         player.PlayerAudios[2].Play();
         player.transform.position = position;
         player.Life = life;
+        player.CanReceiveDamage = false;
 
         player.EnabledOrDisablePlayer(RigidbodyType2D.Dynamic, true, true);
         coroutineStarter.StartCoroutine(BlinkEffect(durationBlinkEffect, intervalBlinkEffect));
@@ -50,5 +51,6 @@ public class PlayerMemento
         }
 
         player.SpriteRenderer.enabled = true;
+        player.CanReceiveDamage = true;
     }
 }

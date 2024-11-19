@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     private bool canShoot = true;
     private bool isGrounded = true;
     private bool changeSpeedForPowerUp = false;
+    private bool canReceiveDamage = true;
 
     public Rigidbody2D Rb { get => rb; }
     public AudioSource[] PlayerAudios { get => playerAudios; set => playerAudios = value; }
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
     public bool ChangeSpeedForPowerUp { get => changeSpeedForPowerUp; set => changeSpeedForPowerUp = value; }
     public bool CanShoot { get => canShoot; set => canShoot = value; }
     public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
+    public bool CanReceiveDamage { get => canReceiveDamage; set => canReceiveDamage = value; }
 
 
     void Start()
@@ -101,9 +103,13 @@ public class Player : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "EnemyBullet":
-                EnemyBullet.ApplyDamge(this);
-                PlayerEvents.OnLifeChange?.Invoke();
-                ManageSounds();
+
+                if (canReceiveDamage)
+                {
+                    EnemyBullet.ApplyDamge(this);
+                    PlayerEvents.OnLifeChange?.Invoke();
+                    ManageSounds();
+                }
                 break;
 
             case "Floor":

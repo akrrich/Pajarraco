@@ -53,7 +53,7 @@ public class PowerUpsManager : MonoBehaviour
                 Random.Range(minSpawnRange.y, maxSpawnRange.y)
             );
 
-            AbstractFactory.CreatePowerUp(Random.Range(0, 2), randomPosition);
+            AbstractFactory.CreatePowerUp(Random.Range(0, 3), randomPosition);
         }
     }
 
