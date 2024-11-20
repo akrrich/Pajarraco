@@ -14,6 +14,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject panelSettings;
     [SerializeField] private Button[] buttons;
 
+    private GameState gameState;
+
 
     private bool isGamePaused = false;
 
@@ -84,11 +86,9 @@ public class PauseManager : MonoBehaviour
 
                 actionSound.Play();
                 isGamePaused = true;
-                panelPause.SetActive(isGamePaused);
+                panelPause.SetActive(true);
             }
         }
-
-        Time.timeScale = isGamePaused ? 0f : 1f;
     }
 
 

@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour
     public void ButtonCredits()
     {
         GameManager.Instance.ChangeStateTo(GameState.Credits);
-        StartCoroutine(ChangeSceneAfterSound("Credits", 2));
+        StartCoroutine(ChangeSceneAfterSound("Credits", 3));
     }
 
     public void ButtonCloseGame()
@@ -71,7 +71,7 @@ public class MainMenu : MonoBehaviour
     private IEnumerator CloseGameAfterSound()
     {
         clickSound.Play();
-        buttons[3].interactable = false;
+        buttons[4].interactable = false;
         yield return new WaitForSeconds(clickSound.clip.length);
         Application.Quit();
     }

@@ -701,7 +701,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.010253906, y: 152.46481}
+  m_AnchoredPosition: {x: -0.010253906, y: 214}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &399402427
@@ -874,7 +874,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.06, y: -657}
+  m_AnchoredPosition: {x: 91.06, y: -650}
   m_SizeDelta: {x: 394.371, y: 228.357}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &496423412
@@ -1227,7 +1227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.057, y: -274.58}
+  m_AnchoredPosition: {x: 91.057, y: -317}
   m_SizeDelta: {x: 368, y: 237.031}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776996875
@@ -1499,8 +1499,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.2902956, y: 0.563}
-  m_SizeDelta: {x: 1987.2, y: 1514.4}
+  m_AnchoredPosition: {x: -4.2902956, y: 63.40172}
+  m_SizeDelta: {x: 1987.2, y: 1283.4918}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &979371839
 GameObject:
@@ -2999,7 +2999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.06, y: 101.364}
+  m_AnchoredPosition: {x: 91.06, y: 31}
   m_SizeDelta: {x: 394.37, y: 216.184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684952816
@@ -3299,7 +3299,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.06, y: -460.811}
+  m_AnchoredPosition: {x: 91.06, y: -484}
   m_SizeDelta: {x: 394.37, y: 255.711}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2024070813
@@ -3432,7 +3432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 91.06, y: -60.655}
+  m_AnchoredPosition: {x: 91.06, y: -122}
   m_SizeDelta: {x: 394.37, y: 273.242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2131556113
@@ -3579,7 +3579,7 @@ PrefabInstance:
       objectReference: {fileID: 672312705755533245, guid: a06ec9b6ecccb9b498e01a68c5e94b9c, type: 2}
     - target: {fileID: 1122336564503131999, guid: 2f91481c76439dc4c8b417a4024016a0, type: 3}
       propertyPath: m_hasFontAssetChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1798890134313581549, guid: 2f91481c76439dc4c8b417a4024016a0, type: 3}
       propertyPath: m_fontAsset

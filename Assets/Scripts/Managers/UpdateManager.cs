@@ -55,12 +55,12 @@ public class UpdateManager
 
     private void TimeScaleMode(GameState gameState)
     {
-        if (gameState != GameState.Defeated)
+        if (gameState != GameState.Defeated && gameState != GameState.Pause)
         {
             Time.timeScale = 1f;
         }
 
-        else
+        else if (gameState == GameState.Defeated || gameState == GameState.Pause)
         {
             Time.timeScale = 0f;
         }
