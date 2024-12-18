@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class PowerUps : MonoBehaviour
 {
+   
+    [SerializeField] public class StringEvent : UnityEvent<string> { }
+
     [SerializeField] protected PowerUpScriptable powerUpScriptable;
     protected PowerUpsManager powerUpsManager;
 
@@ -12,6 +16,8 @@ public abstract class PowerUps : MonoBehaviour
     [SerializeField] private int id;
 
     public int Id { get => id; }
+
+    public UnityEvent _powerUp;
 
     private bool canMovePowerUp = true;
 
@@ -46,6 +52,8 @@ public abstract class PowerUps : MonoBehaviour
             powerUpPick.Play();
             ActivePowerUp(collider);
             DestroyPowerUp();
+            
+            
         }
     }
 

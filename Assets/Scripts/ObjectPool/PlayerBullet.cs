@@ -24,6 +24,12 @@ public class PlayerBullet : MonoBehaviour
     {
         GameManager.Instance.GameStateDefeated += StopPhysics;
         GameManager.Instance.GameStateWin += StopPhysics;
+
+    }
+
+    public void OnEnable()
+    {
+        
     }
 
     void OnDestroy()

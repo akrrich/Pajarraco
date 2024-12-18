@@ -14,7 +14,7 @@ public class PowerUpsManager : MonoBehaviour
 
     void Awake()
     {
-        numberToGuess = Random.Range(0, 10001);
+        numberToGuess = Random.Range(0, 700);
 
         GameManager.Instance.GameStatePlaying += PowerUpsManagerUpdate;
     }
@@ -41,11 +41,11 @@ public class PowerUpsManager : MonoBehaviour
 
     private void InstantiateRandomPowerUpInRandomPosition()
     {
-        int randomNumbersGeneratedAllTime = Random.Range(0, 10001);
+        int randomNumbersGeneratedAllTime = Random.Range(0, 700);
 
         if (randomNumbersGeneratedAllTime == numberToGuess)
         {
-            numberToGuess = Random.Range(0, 10001);
+            numberToGuess = Random.Range(0, 700);
 
             Vector2 randomPosition = new Vector2(
 
