@@ -9,14 +9,5 @@ public class PowerUpInteraction : MonoBehaviour
     public void SendEvent(string powerUpAction)
     {
         AnalyticsManager.instance.PowerUpPickUp(powerUpAction);
-        //Debug.Log($"Enviando evento: {powerUpAction}");
-
-        //PowerUpEvent pwUp = new PowerUpEvent
-        //{
-        //    actionName = powerUpAction
-        //};
-
-        //AnalyticsService.Instance.RecordEvent(pwUp);
-        //AnalyticsService.Instance.Flush();
     }
 }

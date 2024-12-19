@@ -52,8 +52,7 @@ public abstract class PowerUps : MonoBehaviour
             powerUpPick.Play();
             ActivePowerUp(collider);
             DestroyPowerUp();
-            
-            
+            _powerUp.Invoke();
         }
     }
 
