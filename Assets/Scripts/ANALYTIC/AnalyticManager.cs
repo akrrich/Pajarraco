@@ -7,6 +7,12 @@ using System;
 
 public class AnalyticsManager : MonoBehaviour
 {
+    public static AnalyticsManager instance;
+    public void Awake()
+    {
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     async void Start()
     {
         try
@@ -21,9 +27,18 @@ public class AnalyticsManager : MonoBehaviour
     }
 
     public void GiveConsent()
-    {
-        
+    {     
         AnalyticsService.Instance.StartDataCollection();
         Debug.Log("Consent given! We can get the data!!");
+    }
+    public void PowerUpPickUp(string powerUpAction)
+    {
+        PowerUpEvent evt = new PowerUpEvent
+        {
+            actionName = powerUpAction,
+        };
+
+        AnalyticsService.Instance.RecordEvent(evt);
+        AnalyticsService.Instance.Flush();
     }
 }

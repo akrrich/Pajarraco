@@ -668,11 +668,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: d0b02e49-d4b8-40ab-9e72-737e2b16266b
+  cloudProjectId: 89c5fb1f-c58d-4a89-9065-bfecac68c013
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: METRICAS
-  organizationId: coyote-flecha
+  projectName: My project
+  organizationId: unity_4d95ffd98b254e3f8622
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
