@@ -49,6 +49,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 836d9f51b522b794489b0241239307b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletCount:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6472274478412470548, guid: 1d585ab817c506a49885af8733720590, type: 3}
+        m_TargetAssemblyTypeName: BulletInteraction, Assembly-CSharp
+        m_MethodName: SendEvent
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &8361464125374105546
 SpriteRenderer:
   m_ObjectHideFlags: 0

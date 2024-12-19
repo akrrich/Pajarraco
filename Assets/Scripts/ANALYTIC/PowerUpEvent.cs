@@ -1,6 +1,3 @@
-
-
-
 public class PowerUpEvent : Unity.Services.Analytics.Event
 {
 

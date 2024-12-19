@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class Player : MonoBehaviour
     private bool isGrounded = true;
     private bool changeSpeedForPowerUp = false;
     private bool canReceiveDamage = true;
+
+    public UnityEvent _damaged;
 
     public Rigidbody2D Rb { get => rb; }
     public AudioSource[] PlayerAudios { get => playerAudios; set => playerAudios = value; }
@@ -106,6 +109,8 @@ public class Player : MonoBehaviour
 
                 if (canReceiveDamage)
                 {
+                    //ACA
+                    _damaged.Invoke();
                     EnemyBullet.ApplyDamge(this);
                     PlayerEvents.OnLifeChange?.Invoke();
                     ManageSounds();

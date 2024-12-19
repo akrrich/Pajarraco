@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerBullet : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class PlayerBullet : MonoBehaviour
 
     private Vector2 offsetBulletPosition = new Vector2(0, 0.8f);
 
+    public UnityEvent _bulletCount;
     public static float Speed { get => speed; set => speed = value; }
 
 
@@ -29,7 +31,7 @@ public class PlayerBullet : MonoBehaviour
 
     public void OnEnable()
     {
-        
+        _bulletCount.Invoke();
     }
 
     void OnDestroy()

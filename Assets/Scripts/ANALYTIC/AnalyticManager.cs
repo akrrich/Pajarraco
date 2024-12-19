@@ -35,10 +35,31 @@ public class AnalyticsManager : MonoBehaviour
     {
         PowerUpEvent evt = new PowerUpEvent
         {
-            actionName = powerUpAction,
+            actionName = powerUpAction
         };
 
         AnalyticsService.Instance.RecordEvent(evt);
         AnalyticsService.Instance.Flush();
     }
+    public void BulletsUsed(string BulletsSpawned)
+    {
+        BulletEvent evt = new BulletEvent
+        {
+            actionName = BulletsSpawned
+        };
+
+        AnalyticsService.Instance.RecordEvent(evt);
+        AnalyticsService.Instance.Flush();
+    }
+    public void PlayerDamaged(string DamageTaken)
+    {
+        BulletEvent evt = new BulletEvent
+        {
+            actionName = DamageTaken
+        };
+
+        AnalyticsService.Instance.RecordEvent(evt);
+        AnalyticsService.Instance.Flush();
+    }
+
 }
