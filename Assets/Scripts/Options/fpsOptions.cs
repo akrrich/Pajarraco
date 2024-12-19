@@ -38,7 +38,8 @@ public class fpsOptions : MonoBehaviour
         }
         else
         {
-            selectedFPS = int.Parse(selectedOption.Replace(" FPS", ""));
+            int v = int.Parse(selectedOption.Replace(" FPS",""));
+            selectedFPS = v;
         }
 
         QualitySettings.vSyncCount = 0;

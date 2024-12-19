@@ -6,15 +6,17 @@ using Unity.Services.Analytics;
 public class PowerUpInteraction : MonoBehaviour
 {
     // Start is called before the first frame update
-  public void SendEvent(string powerUpAction)
+    public void SendEvent(string powerUpAction)
     {
+        Debug.Log($"Enviando evento: {powerUpAction}");
+
         PowerUpEvent pwUp = new PowerUpEvent
         {
             actionName = powerUpAction
         };
 
         AnalyticsService.Instance.RecordEvent(pwUp);
+        AnalyticsService.Instance.Flush();
+        return;
     }
-
-   
 }
