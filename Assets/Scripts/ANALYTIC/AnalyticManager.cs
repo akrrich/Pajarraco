@@ -53,7 +53,7 @@ public class AnalyticsManager : MonoBehaviour
     }
     public void PlayerDamaged(string DamageTaken)
     {
-        BulletEvent evt = new BulletEvent
+        PlayerEvent evt = new PlayerEvent
         {
             actionName = DamageTaken
         };
