@@ -61,5 +61,15 @@ public class AnalyticsManager : MonoBehaviour
         AnalyticsService.Instance.RecordEvent(evt);
         AnalyticsService.Instance.Flush();
     }
+    public void JumpsMade(string jumpMade)
+    {
+        JumpEvent evt = new JumpEvent
+        {
+            actionName = jumpMade
+        };
+
+        AnalyticsService.Instance.RecordEvent(evt);
+        AnalyticsService.Instance.Flush();
+    }
 
 }

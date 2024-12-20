@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private bool canReceiveDamage = true;
 
     public UnityEvent _damaged;
+    public UnityEvent _jumped;
 
     public Rigidbody2D Rb { get => rb; }
     public AudioSource[] PlayerAudios { get => playerAudios; set => playerAudios = value; }
@@ -201,5 +202,10 @@ public class Player : MonoBehaviour
         {
             jumpQueue.Dequeue().Invoke();
         }
+    }
+
+    public void JumpAnalytics()
+    {
+        _jumped.Invoke();
     }
 }

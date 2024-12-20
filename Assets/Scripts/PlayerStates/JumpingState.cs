@@ -15,6 +15,7 @@ public class JumpingState : IState
         player.IsGrounded = false;
         player.PlayerAudios[3].Play();
         player.Rb.AddForce(Vector2.up * player.JumpForce, ForceMode2D.Impulse);
+        player.JumpAnalytics();
     }
 
     public void Exit()
