@@ -8,7 +8,6 @@ public class PlayerInteraction : MonoBehaviour
     // Start is called before the first frame update
     public void SendEvent(int DamageTaken)
     {
-        DamageTaken++;
         AnalyticsManager.instance.PlayerDamaged(DamageTaken.ToString());
     }
 }

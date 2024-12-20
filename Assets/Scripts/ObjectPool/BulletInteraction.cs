@@ -8,7 +8,6 @@ public class BulletInteraction : MonoBehaviour
     // Start is called before the first frame update
     public void SendEvent(int BulletAction)
     {
-        BulletAction++;
         AnalyticsManager.instance.BulletsUsed(BulletAction.ToString());
     }
 }
