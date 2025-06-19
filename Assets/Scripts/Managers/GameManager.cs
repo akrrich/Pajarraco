@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
     private UpdateManager updateManager;
     private ScenesManager scenesManager;
     private PauseManager pauseManager;
+    [Header("Sistemas de juego")]
     [SerializeField] private AudioManager audioManager;
+    
+    [Header("Pool de balas")]
+    [SerializeField] private ObjectPooler bulletPooler;
 
     public static GameManager Instance { get => instance; }
 
@@ -62,5 +66,15 @@ public class GameManager : MonoBehaviour
         scenesManager = new ScenesManager();
         pauseManager = new PauseManager(); // = new PauseManager();
         audioManager.Initialize();
+    }
+    public void FireBullet(Vector3 position, Vector3 direction, bool isEnemy, float speed = 10f)
+    {
+        if (bulletPooler == null)
+        {
+            Debug.LogWarning("BulletPooler no está asignado en el GameManager.");
+            return;
+        }
+
+        bulletPooler.FireBullet(position, direction, speed, isEnemy);
     }
 }

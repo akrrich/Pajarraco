@@ -1,82 +1,52 @@
+using System;
 using UnityEngine;
-
-public abstract class Bullet : MonoBehaviour
+public class Bullet
 {
-    private ObjectPooler bulletPool;
+    public Vector3 Position { get; protected set; }
+    public Vector3 Direction { get; protected set; }
+    public float Speed { get; protected set; }
 
-    // Revisar esto si hay que cambiarlo de lugar
-    protected SpriteRenderer spriteRenderer;
+    protected Transform transform;
+    protected Transform returnTransform;
+    protected Action<Bullet> returnToPoolCallback;
 
-    [SerializeField] protected int damage;
-    [SerializeField] protected float speed;
-    [SerializeField] private string poolNameInHieararchy;
-
-    protected Vector2 direction;
-
-
-    protected virtual void Awake()
+    public Bullet(Transform transform, Action<Bullet> returnToPoolCallback)
     {
-        SuscribeToUpdateManagerEvent();
-        GetComponents();
+        this.transform = transform;
+        this.returnToPoolCallback = returnToPoolCallback;
+        this.Position = transform.position;
     }
 
-    //Simulacion Update
-    protected virtual void UpdateBullet()
+    protected virtual void FindReturnReference(string reference)
     {
-        Movement();
-        CheckCollisions();
-    }
-
-    // Simulacion de Gizmos
-    protected virtual void OnDrawGizmosBullet()
-    {
-        Collisions.DrawRectOnGizmos(transform);
-    }
-
-    void OnDestroy()
-    {
-        UnsuscribeToUpdateManagerEvent();
-    }
-
-
-    private void SuscribeToUpdateManagerEvent()
-    {
-        GameManager.Instance.UpdateManager.OnUpdate += UpdateBullet;
-        GameManager.Instance.UpdateManager.OnDrawGizmos += OnDrawGizmosBullet;
-    }
-
-    private void UnsuscribeToUpdateManagerEvent()
-    {
-        GameManager.Instance.UpdateManager.OnUpdate -= UpdateBullet;
-        GameManager.Instance.UpdateManager.OnDrawGizmos -= OnDrawGizmosBullet;
-    }
-
-    protected virtual void GetComponents()
-    {
-        bulletPool = GameObject.Find(poolNameInHieararchy).GetComponent<ObjectPooler>();
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-    }
-
-    protected void Movement()
-    {
-        if (gameObject.activeInHierarchy)
+        returnTransform = GameObject.Find(reference)?.transform;
+        if (returnTransform == null)
         {
-            transform.position += (Vector3)(direction * speed * Time.deltaTime);
+            Debug.LogWarning("Roof no encontrado en la escena.");
         }
     }
 
-    protected abstract void CheckCollisions();
-
-    protected void OnReturnBulletToPool()
+    public virtual void Init(Vector3 direction, float speed)
     {
-        transform.position = bulletPool.transform.position;
-        bulletPool.ReturnObjectToPool(this);
+        Direction = direction.normalized;
+        Speed = speed;
     }
 
-
-    public void OnActiveBullet(Transform startPosition, Vector2 dir)
+    public virtual void Tick(float deltaTime)
     {
-        transform.position = startPosition.position;
-        direction = dir.normalized;
+        Position += Direction * Speed * deltaTime;
+        transform.position = Position;
+
+        if (returnTransform != null && Collisions.CollisionBetweenRects(transform, returnTransform))
+        {
+            ReturnToPool();
+        }
     }
+
+    protected virtual void ReturnToPool()
+    {
+        returnToPoolCallback?.Invoke(this);
+    }
+
+    public virtual Transform GetTransform() => transform;
 }

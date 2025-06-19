@@ -28,7 +28,7 @@ public class EnemyModel
         rightColumn = GameObject.Find("RightWall").transform;
         leftColumn = GameObject.Find("LeftWall").transform;
 
-        bulletPlayerPool = GameObject.Find("BulletEnemyPool").GetComponent<ObjectPooler>();
+       // bulletPlayerPool = GameObject.Find("BulletEnemyPool").GetComponent<ObjectPooler>();
     }
 
     private void Death()
@@ -47,8 +47,7 @@ public class EnemyModel
 
             GameManager.Instance.AudioManager.PlaySFX("EnemyShoot");
 
-            var bullet = bulletPlayerPool.GetObjectFromPool<Bullet>();
-            bullet.OnActiveBullet(firePosition, dir);
+            GameManager.Instance.FireBullet(firePosition.position, dir,true, 15);
         }
     }
 

@@ -30,7 +30,7 @@ public class PlayerModel
         leftColumn = GameObject.Find("LeftWall").transform;
         floor = GameObject.Find("Floor").transform;
 
-        bulletPlayerPool = GameObject.Find("BulletPlayerPool").GetComponent<ObjectPooler>();
+       // bulletPlayerPool = GameObject.Find("BulletPlayerPool").GetComponent<ObjectPooler>();
     }
 
     private void Death()
@@ -42,9 +42,7 @@ public class PlayerModel
     public void Attack(Transform firePosition, Vector2 dir)
     {
         GameManager.Instance.AudioManager.PlaySFX("PlayerShoot");
-
-        var bullet = bulletPlayerPool.GetObjectFromPool<Bullet>();
-        bullet.OnActiveBullet(firePosition, dir);
+        GameManager.Instance.FireBullet(firePosition.position,dir,false, 20f);
     }
 
     public void Jump(CustomRigidBody customRB)
