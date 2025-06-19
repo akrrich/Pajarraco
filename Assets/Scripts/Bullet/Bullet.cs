@@ -15,6 +15,8 @@ public class Bullet
         this.transform = transform;
         this.returnToPoolCallback = returnToPoolCallback;
         this.Position = transform.position;
+        //va a funcionar solo el player con esto
+        FindReturnReference("Roof");
     }
 
     protected virtual void FindReturnReference(string reference)
