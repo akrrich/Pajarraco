@@ -15,17 +15,13 @@ public class Bullet
         this.transform = transform;
         this.returnToPoolCallback = returnToPoolCallback;
         this.Position = transform.position;
-        //va a funcionar solo el player con esto
+
         FindReturnReference("Roof");
     }
 
     protected virtual void FindReturnReference(string reference)
     {
         returnTransform = GameObject.Find(reference)?.transform;
-        if (returnTransform == null)
-        {
-            Debug.LogWarning("Roof no encontrado en la escena.");
-        }
     }
 
     public virtual void Init(Vector3 direction, float speed)
@@ -39,7 +35,7 @@ public class Bullet
         Position += Direction * Speed * deltaTime;
         transform.position = Position;
 
-        if (returnTransform != null && Collisions.CollisionBetweenRects(transform, returnTransform))
+        if (Collisions.CollisionBetweenRects(transform, returnTransform))
         {
             ReturnToPool();
         }

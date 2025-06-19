@@ -12,13 +12,14 @@ public class ObjectPooler : MonoBehaviour
     private List<Transform> enemyPool = new List<Transform>();
     private List<Bullet> activeBullets = new List<Bullet>();
 
+
     void Awake()
     {
         InitializePool(playerBulletPrefab, playerPool);
         InitializePool(enemyBulletPrefab, enemyPool);
     }
 
-    private void Update()
+    void Update()
     {
         float deltaTime = Time.deltaTime;
         for (int i = activeBullets.Count - 1; i >= 0; i--)
@@ -26,6 +27,7 @@ public class ObjectPooler : MonoBehaviour
             activeBullets[i].Tick(deltaTime);
         }
     }
+
 
     private void InitializePool(GameObject prefab, List<Transform> targetPool)
     {
@@ -61,13 +63,7 @@ public class ObjectPooler : MonoBehaviour
         t.gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// Dispara una bala desde el pool correspondiente.
-    /// </summary>
-    /// <param name="position">Posición inicial</param>
-    /// <param name="direction">Dirección del disparo</param>
-    /// <param name="speed">Velocidad de la bala</param>
-    /// <param name="isEnemyBullet">True si es bala enemiga</param>
+
     public void FireBullet(Vector3 position, Vector3 direction, float speed, bool isEnemyBullet = false)
     {
         List<Transform> selectedPool = isEnemyBullet ? enemyPool : playerPool;
