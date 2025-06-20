@@ -29,17 +29,23 @@ public abstract class Bullet
     // Simulacion de Update
     protected virtual void UpdateBullet()
     {
-        if (transform.gameObject.activeSelf)
+        if (transform != null)
         {
-            Movemnt();
-            CheckCollisions();
+            if (transform.gameObject.activeSelf)
+            {
+                Movemnt();
+                CheckCollisions();
+            }
         }
     }
 
     // Simulacion de Gizmos
     protected virtual void OnDrawGizmosBullet()
     {
-        Collisions.DrawRectOnGizmos(transform);
+        if (transform.gameObject.activeSelf)
+        {
+            Collisions.DrawRectOnGizmos(transform);
+        }
     }
 
 

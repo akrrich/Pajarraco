@@ -45,7 +45,7 @@ public class SelectorMainMenu : SelectorController
             {
                 case 0:
                     onPausePanelFind?.Invoke();
-                    GameManager.Instance.ScenesManager.ChangeScene("Level1");
+                    GameManager.Instance.ScenesManager.ChangeScene("Level1", "Level1UI");
                     break;
 
                 case 1:
@@ -53,7 +53,7 @@ public class SelectorMainMenu : SelectorController
                     break;
 
                 case 2:
-                    GameManager.Instance.ScenesManager.ChangeScene("Credits");
+                    GameManager.Instance.ScenesManager.ChangeScene("Credits", "CreditsUI");
                     break;
 
                 case 3:

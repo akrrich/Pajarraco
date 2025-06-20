@@ -370,7 +370,7 @@ MonoBehaviour:
   poolerManager:
     playerBulletPrefab: {fileID: 7168655775637898421, guid: 610c4b999eaf68449b898f22f3c09f75, type: 3}
     enemyBulletPrefab: {fileID: 5150995765596657153, guid: 2ab5f8297900d8a4fa806b9466114745, type: 3}
-    poolParent: {fileID: 0}
+    poolParent: {fileID: 594322167}
     poolSize: 10
 --- !u!4 &594322167
 Transform:

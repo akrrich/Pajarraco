@@ -9,9 +9,10 @@ public class ScenesManager
     }
 
 
-    public void ChangeScene(string sceneName) 
+    public void ChangeScene(string sceneName, string additiveSceneName) 
     {
         LoadScene(sceneName);
+        LoadSceneAdditive(additiveSceneName);
     }
 
     public void ExitGame()

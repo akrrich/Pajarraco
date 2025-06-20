@@ -53,7 +53,7 @@ public class SelectorLevel : SelectorController
                 case 2:
                     GameManager.Instance.PauseManager.IsGamePaused = false;
                     Time.timeScale = 1f;
-                    GameManager.Instance.ScenesManager.ChangeScene("MainMenu");
+                    GameManager.Instance.ScenesManager.ChangeScene("MainMenu", "MainMenuUI");
                     break;
 
                 case 3:

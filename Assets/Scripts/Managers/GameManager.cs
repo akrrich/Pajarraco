@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PoolerManager poolerManager;
 
+    private bool sceneLevel1WasInitialized = false;
+
     public static GameManager Instance { get => instance; }
 
     public UpdateManager UpdateManager { get => updateManager; }
@@ -22,8 +25,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("Si");
         CreateSingleton();
         InitializeManagers();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Update()
@@ -63,8 +69,19 @@ public class GameManager : MonoBehaviour
     {
         updateManager = new UpdateManager();
         scenesManager = new ScenesManager();
-        pauseManager = new PauseManager(); // = new PauseManager();
+        pauseManager = new PauseManager();
         audioManager.Initialize();
-        poolerManager.Initialize();
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (!sceneLevel1WasInitialized)
+        {
+            if (scene.name == "Level1")
+            {
+                poolerManager.Initialize();
+                sceneLevel1WasInitialized = true;
+            }
+        }
     }
 }
