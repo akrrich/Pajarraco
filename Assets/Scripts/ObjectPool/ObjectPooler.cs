@@ -6,11 +6,11 @@ public class ObjectPooler : MonoBehaviour
     [Header("Pooling Config")]
     [SerializeField] private GameObject playerBulletPrefab;
     [SerializeField] private GameObject enemyBulletPrefab;
+    [SerializeField] private Transform parent;
     [SerializeField] private int poolSize;
 
-    private List<Transform> playerPool = new List<Transform>();
-    private List<Transform> enemyPool = new List<Transform>();
-    private List<Bullet> activeBullets = new List<Bullet>();
+    private List<Bullet> playerPool = new List<Bullet>();
+    private List<Bullet> enemyPool = new List<Bullet>();
 
 
     void Awake()
@@ -19,35 +19,28 @@ public class ObjectPooler : MonoBehaviour
         InitializePool(enemyBulletPrefab, enemyPool);
     }
 
-    void Update()
-    {
-        float deltaTime = Time.deltaTime;
-        for (int i = activeBullets.Count - 1; i >= 0; i--)
-        {
-            activeBullets[i].Tick(deltaTime);
-        }
-    }
 
-
-    private void InitializePool(GameObject prefab, List<Transform> targetPool)
+    private void InitializePool(GameObject prefab, List<Bullet> targetPool)
     {
         for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(prefab, transform);
-            obj.transform.position = transform.position;
+            GameObject obj = Instantiate(prefab, parent);
+            obj.transform.position = parent.position;
             obj.SetActive(false);
-            targetPool.Add(obj.transform);
+
+            Bullet bullet = new Bullet(obj.transform, ReturnObjectToPool);
+            targetPool.Add(bullet);
         }
     }
 
-    private Transform GetObjectFromPool(List<Transform> pool)
+    private Bullet GetObjectFromPool(List<Bullet> pool)
     {
-        foreach (var obj in pool)
+        foreach (var bullet in pool)
         {
-            if (!obj.gameObject.activeSelf)
+            if (!bullet.GetTransform().gameObject.activeSelf)
             {
-                obj.gameObject.SetActive(true);
-                return obj;
+                bullet.GetTransform().gameObject.SetActive(true);
+                return bullet;
             }
         }
 
@@ -56,29 +49,23 @@ public class ObjectPooler : MonoBehaviour
 
     private void ReturnObjectToPool(Bullet bullet)
     {
-        activeBullets.Remove(bullet);
-
         Transform t = bullet.GetTransform();
-        t.SetParent(transform);
+        t.SetParent(parent);
         t.gameObject.SetActive(false);
     }
 
 
-    public void FireBullet(Vector3 position, Vector3 direction, float speed, bool isEnemyBullet = false)
+    public void FireBullet(Vector3 position, Vector3 direction, bool isEnemyBullet = false)
     {
-        List<Transform> selectedPool = isEnemyBullet ? enemyPool : playerPool;
-        Transform bulletTransform = GetObjectFromPool(selectedPool);
+        List<Bullet> selectedPool = isEnemyBullet ? enemyPool : playerPool;
+        Bullet bullet = GetObjectFromPool(selectedPool);
 
-        if (bulletTransform == null)
+        if (bullet != null)
         {
-            Debug.LogWarning("No hay balas disponibles en el pool seleccionado.");
-            return;
+            Transform t = bullet.GetTransform();
+            t.position = position;
+            bullet.Position = position;
+            bullet.Init(direction);
         }
-
-        bulletTransform.position = position;
-
-        Bullet bullet = new Bullet(bulletTransform, ReturnObjectToPool);
-        bullet.Init(direction, speed);
-        activeBullets.Add(bullet);
     }
 }

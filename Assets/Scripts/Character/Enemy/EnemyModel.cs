@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class EnemyModel
 {
-    private ObjectPooler bulletPlayerPool;
-
     private Transform rightColumn;
     private Transform leftColumn;
 
@@ -27,8 +25,6 @@ public class EnemyModel
     {
         rightColumn = GameObject.Find("RightWall").transform;
         leftColumn = GameObject.Find("LeftWall").transform;
-
-       // bulletPlayerPool = GameObject.Find("BulletEnemyPool").GetComponent<ObjectPooler>();
     }
 
     private void Death()
@@ -47,7 +43,7 @@ public class EnemyModel
 
             GameManager.Instance.AudioManager.PlaySFX("EnemyShoot");
 
-            GameManager.Instance.FireBullet(firePosition.position, dir,true, 15);
+            GameManager.Instance.FireBullet(firePosition.position, dir,true);
         }
     }
 

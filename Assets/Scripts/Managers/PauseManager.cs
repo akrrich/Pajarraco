@@ -25,7 +25,7 @@ public class PauseManager
             CheckPauseStatus();
         }
 
-        Debug.Log(isGamePaused);
+        //Debug.Log(isGamePaused);
     }
 
 

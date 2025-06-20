@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PlayerModel
 {
-    private ObjectPooler bulletPlayerPool;
-
     private Transform rightColumn;
     private Transform leftColumn;
     private Transform floor;
@@ -29,8 +27,6 @@ public class PlayerModel
         rightColumn = GameObject.Find("RightWall").transform;
         leftColumn = GameObject.Find("LeftWall").transform;
         floor = GameObject.Find("Floor").transform;
-
-       // bulletPlayerPool = GameObject.Find("BulletPlayerPool").GetComponent<ObjectPooler>();
     }
 
     private void Death()
@@ -42,7 +38,7 @@ public class PlayerModel
     public void Attack(Transform firePosition, Vector2 dir)
     {
         GameManager.Instance.AudioManager.PlaySFX("PlayerShoot");
-        GameManager.Instance.FireBullet(firePosition.position,dir,false, 20f);
+        GameManager.Instance.FireBullet(firePosition.position, dir, false);
     }
 
     public void Jump(CustomRigidBody customRB)

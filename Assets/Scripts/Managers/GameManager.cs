@@ -67,14 +67,9 @@ public class GameManager : MonoBehaviour
         pauseManager = new PauseManager(); // = new PauseManager();
         audioManager.Initialize();
     }
-    public void FireBullet(Vector3 position, Vector3 direction, bool isEnemy, float speed = 10f)
-    {
-        if (bulletPooler == null)
-        {
-            Debug.LogWarning("BulletPooler no está asignado en el GameManager.");
-            return;
-        }
 
-        bulletPooler.FireBullet(position, direction, speed, isEnemy);
+    public void FireBullet(Vector3 position, Vector3 direction, bool isEnemy)
+    {
+        bulletPooler.FireBullet(position, direction, isEnemy);
     }
 }

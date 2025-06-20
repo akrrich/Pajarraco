@@ -1,14 +1,18 @@
 using System;
+using Unity.Properties;
 using UnityEngine;
+
 public class Bullet
 {
-    public Vector3 Position { get; protected set; }
-    public Vector3 Direction { get; protected set; }
-    public float Speed { get; protected set; }
+    public Vector3 Position { get; set; }
+    private Vector3 dir;
 
-    protected Transform transform;
-    protected Transform returnTransform;
-    protected Action<Bullet> returnToPoolCallback;
+    private float speed = 15;
+
+    private Transform transform;
+    private Transform roof;
+    private Action<Bullet> returnToPoolCallback;
+
 
     public Bullet(Transform transform, Action<Bullet> returnToPoolCallback)
     {
@@ -16,35 +20,61 @@ public class Bullet
         this.returnToPoolCallback = returnToPoolCallback;
         this.Position = transform.position;
 
-        FindReturnReference("Roof");
+        roof = GameObject.Find("Roof").transform;
+
+        SuscribeToUpdateManagerEvents();
     }
 
-    protected virtual void FindReturnReference(string reference)
+
+    // Simulacion de Update
+    void UpdateBullet()
     {
-        returnTransform = GameObject.Find(reference)?.transform;
+        if (transform.gameObject.activeSelf)
+        {
+            Tick();
+        }
     }
 
-    public virtual void Init(Vector3 direction, float speed)
+    // Simulacion de Gizmos
+    void OnDrawGizmosBullet()
     {
-        Direction = direction.normalized;
-        Speed = speed;
+        Collisions.DrawRectOnGizmos(transform);
     }
 
-    public virtual void Tick(float deltaTime)
+
+    private void SuscribeToUpdateManagerEvents()
     {
-        Position += Direction * Speed * deltaTime;
+        GameManager.Instance.UpdateManager.OnUpdate += UpdateBullet;
+        GameManager.Instance.UpdateManager.OnDrawGizmos += OnDrawGizmosBullet;
+    }
+
+    // Para un futuro
+    private void UnsuscribeToUpdateManagerEvents()
+    {
+        GameManager.Instance.UpdateManager.OnUpdate -= UpdateBullet;
+        GameManager.Instance.UpdateManager.OnDrawGizmos -= OnDrawGizmosBullet;
+    }
+
+    public void Init(Vector3 direction)
+    {
+        dir = direction.normalized;
+    }
+
+    private void Tick()
+    {
+        Position += dir * speed * Time.deltaTime;
         transform.position = Position;
 
-        if (Collisions.CollisionBetweenRects(transform, returnTransform))
+        if (Collisions.CollisionBetweenRects(transform, roof))
         {
             ReturnToPool();
         }
     }
 
-    protected virtual void ReturnToPool()
+    private void ReturnToPool()
     {
         returnToPoolCallback?.Invoke(this);
     }
 
-    public virtual Transform GetTransform() => transform;
+    public Transform GetTransform() => transform;
 }
