@@ -1,44 +1,51 @@
 using System;
-using Unity.Properties;
 using UnityEngine;
 
-public class Bullet
+public abstract class Bullet
 {
-    public Vector3 Position { get; set; }
-    private Vector3 dir;
+    protected Vector3 dir;
 
-    private float speed = 15;
+    protected float speed;
+    protected int damage;
 
-    private Transform transform;
-    private Transform roof;
+    protected Transform transform; // Representa la posicion en la escena
+
     private Action<Bullet> returnToPoolCallback;
+
+    public Transform Transform { get => transform; set => transform = value; }
 
 
     public Bullet(Transform transform, Action<Bullet> returnToPoolCallback)
     {
         this.transform = transform;
         this.returnToPoolCallback = returnToPoolCallback;
-        this.Position = transform.position;
-
-        roof = GameObject.Find("Roof").transform;
 
         SuscribeToUpdateManagerEvents();
+        GetComponents();
+        Initialize();
     }
 
 
     // Simulacion de Update
-    void UpdateBullet()
+    protected virtual void UpdateBullet()
     {
         if (transform.gameObject.activeSelf)
         {
-            Tick();
+            Movemnt();
+            CheckCollisions();
         }
     }
 
     // Simulacion de Gizmos
-    void OnDrawGizmosBullet()
+    protected virtual void OnDrawGizmosBullet()
     {
         Collisions.DrawRectOnGizmos(transform);
+    }
+
+
+    public void SetDir(Vector3 direction)
+    {
+        dir = direction.normalized;
     }
 
 
@@ -48,6 +55,7 @@ public class Bullet
         GameManager.Instance.UpdateManager.OnDrawGizmos += OnDrawGizmosBullet;
     }
 
+
     // Para un futuro
     private void UnsuscribeToUpdateManagerEvents()
     {
@@ -55,26 +63,19 @@ public class Bullet
         GameManager.Instance.UpdateManager.OnDrawGizmos -= OnDrawGizmosBullet;
     }
 
-    public void Init(Vector3 direction)
+    private void Movemnt()
     {
-        dir = direction.normalized;
+        transform.position += dir * speed * Time.deltaTime;
     }
 
-    private void Tick()
-    {
-        Position += dir * speed * Time.deltaTime;
-        transform.position = Position;
+    protected abstract void GetComponents();
 
-        if (Collisions.CollisionBetweenRects(transform, roof))
-        {
-            ReturnToPool();
-        }
-    }
+    protected abstract void Initialize();
+    
+    protected abstract void CheckCollisions();
 
-    private void ReturnToPool()
+    protected void ReturnToPool()
     {
         returnToPoolCallback?.Invoke(this);
     }
-
-    public Transform GetTransform() => transform;
 }

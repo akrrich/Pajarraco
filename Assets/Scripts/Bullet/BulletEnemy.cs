@@ -1,89 +1,91 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
-//public class BulletEnemy : Bullet
-//{
-//    private PlayerController playerController;
-//    private Transform floor;
+public class BulletEnemy : Bullet
+{
+    private PlayerController playerController;
+    private SpriteRenderer spriteRenderer;
+    private Transform floor;
 
-//    private Color baseNormalColor;
+    private Color baseNormalColor;
 
-//    private bool isStayedInFloor = false;
-
-
-//    protected override void Awake()
-//    {
-//        base.Awake();
-//        Initialize();
-//    }
-
-//    // Simulacon de Update
-//    protected override void UpdateBullet()
-//    {
-//        base.UpdateBullet();
-//    }
-
-//    // Simulacon de Gizmos
-//    protected override void OnDrawGizmosBullet()
-//    {
-//        base.OnDrawGizmosBullet();
-
-//        Collisions.DrawRectOnGizmos(floor);
-//    }
+    private bool isStayedInFloor = false;
 
 
-//    protected override void GetComponents()
-//    {
-//        base.GetComponents();
+    public BulletEnemy(Transform transform, Action<Bullet> returnToPoolCallback) : base(transform, returnToPoolCallback)
+    {
+    }
 
-//        playerController = FindFirstObjectByType<PlayerController>();
-//        floor = GameObject.Find("Floor").transform;
-//    }
 
-//    private void Initialize()
-//    {
-//        baseNormalColor = spriteRenderer.color;
-//    }
+    // Simulacon de Update
+    protected override void UpdateBullet()
+    {
+        base.UpdateBullet();
+    }
 
-//    protected override void CheckCollisions()
-//    {
-//        if (gameObject.activeInHierarchy)
-//        {
-//            if (Collisions.CollisionWithDownEdge(transform, floor) && !isStayedInFloor)
-//            {
-//                isStayedInFloor = true;
-//                direction = Vector2.zero;
-//                StartCoroutine(BlinkEffect());
-//            }
+    // Simulacon de Gizmos
+    protected override void OnDrawGizmosBullet()
+    {
+        base.OnDrawGizmosBullet();
 
-//            if (Collisions.CollisionBetweenRects(transform, playerController.transform))
-//            {
-//                playerController.PlayerModel.GetDamage(damage);
-//                isStayedInFloor = false;
-//                spriteRenderer.color = baseNormalColor;
-//                OnReturnBulletToPool();
-//            }
-//        }
-//    }
+        Collisions.DrawRectOnGizmos(floor);
+    }
 
-//    private IEnumerator BlinkEffect()
-//    {
-//        float duration = 3f;
-//        float elapsed = 0f;
 
-//        Color originalColor = baseNormalColor;
+    protected override void GetComponents()
+    {
+        playerController = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        spriteRenderer = Transform.GetComponentInChildren<SpriteRenderer>();   
+        floor = GameObject.Find("Floor").transform;
+    }
 
-//        while (elapsed < duration)
-//        {
-//            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration); // va de opaco a transparente
-//            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+    protected override void Initialize()
+    {
+        baseNormalColor = spriteRenderer.color;
+        speed = 15f;
+        damage = 1;
+    }
 
-//            elapsed += Time.deltaTime;
-//            yield return null;
-//        }
+    protected override void CheckCollisions()
+    {
+        if (Transform.gameObject.activeInHierarchy)
+        {
+            if (Collisions.CollisionWithDownEdge(transform, floor) && !isStayedInFloor)
+            {
+                isStayedInFloor = true;
+                dir = Vector2.zero;
+                playerController.StartCoroutine(BlinkEffect());
+            }
 
-//        isStayedInFloor = false;
-//        spriteRenderer.color = baseNormalColor;
-//        OnReturnBulletToPool();
-//    }
-//}
+            if (Collisions.CollisionBetweenRects(transform, playerController.transform))
+            {
+                playerController.PlayerModel.GetDamage(damage);
+                isStayedInFloor = false;
+                spriteRenderer.color = baseNormalColor;
+                ReturnToPool();
+            }
+        }
+    }
+
+    private IEnumerator BlinkEffect()
+    {
+        float duration = 3f;
+        float elapsed = 0f;
+
+        Color originalColor = baseNormalColor;
+
+        while (elapsed < duration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / duration);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        isStayedInFloor = false;
+        spriteRenderer.color = baseNormalColor;
+        ReturnToPool();
+    }
+}

@@ -7,11 +7,9 @@ public class GameManager : MonoBehaviour
     private UpdateManager updateManager;
     private ScenesManager scenesManager;
     private PauseManager pauseManager;
-    [Header("Sistemas de juego")]
+
     [SerializeField] private AudioManager audioManager;
-    
-    [Header("Pool de balas")]
-    [SerializeField] private ObjectPooler bulletPooler;
+    [SerializeField] private PoolerManager poolerManager;
 
     public static GameManager Instance { get => instance; }
 
@@ -19,6 +17,7 @@ public class GameManager : MonoBehaviour
     public ScenesManager ScenesManager { get => scenesManager; }
     public AudioManager AudioManager { get => audioManager; }
     public PauseManager PauseManager { get => pauseManager; }
+    public PoolerManager PoolerManager { get => poolerManager; }
 
 
     void Awake()
@@ -66,10 +65,6 @@ public class GameManager : MonoBehaviour
         scenesManager = new ScenesManager();
         pauseManager = new PauseManager(); // = new PauseManager();
         audioManager.Initialize();
-    }
-
-    public void FireBullet(Vector3 position, Vector3 direction, bool isEnemy)
-    {
-        bulletPooler.FireBullet(position, direction, isEnemy);
+        poolerManager.Initialize();
     }
 }

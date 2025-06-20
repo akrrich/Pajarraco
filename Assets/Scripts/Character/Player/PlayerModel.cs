@@ -38,7 +38,7 @@ public class PlayerModel
     public void Attack(Transform firePosition, Vector2 dir)
     {
         GameManager.Instance.AudioManager.PlaySFX("PlayerShoot");
-        GameManager.Instance.FireBullet(firePosition.position, dir, false);
+        GameManager.Instance.PoolerManager.FireBullet(BulletType.Player, firePosition, dir);
     }
 
     public void Jump(CustomRigidBody customRB)

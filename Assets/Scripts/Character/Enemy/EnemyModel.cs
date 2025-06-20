@@ -42,8 +42,7 @@ public class EnemyModel
             timeToShoot = 0f;
 
             GameManager.Instance.AudioManager.PlaySFX("EnemyShoot");
-
-            GameManager.Instance.FireBullet(firePosition.position, dir,true);
+            GameManager.Instance.PoolerManager.FireBullet(BulletType.Enemy, firePosition, dir);
         }
     }
 

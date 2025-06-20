@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Collisions
 {
@@ -10,6 +11,19 @@ public class Collisions
             self.position.y - self.localScale.y / 2 <= target.position.y + target.localScale.y / 2)
         {
             return true;
+        }
+
+        return false;
+    }
+
+    public static bool CollisionBetweenRectsArray(Transform self, List<Transform> targets)
+    {
+        foreach (Transform target in targets)
+        {
+            if (CollisionBetweenRects(self, target))
+            {
+                return true;
+            }
         }
 
         return false;
