@@ -54,6 +54,7 @@ public class SelectorLevel : SelectorController
                     GameManager.Instance.PauseManager.IsGamePaused = false;
                     Time.timeScale = 1f;
                     GameManager.Instance.ScenesManager.ChangeScene("MainMenu", "MainMenuUI");
+                    GameManager.Instance.PoolerManager.ReturnAllBulletsToPool();
                     break;
 
                 case 3:

@@ -25,10 +25,20 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Si");
-        CreateSingleton();
-        InitializeManagers();
+        if (instance == null)
+        {
+            instance = this;
+        }
 
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        InitializeManagers();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -49,22 +59,6 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void CreateSingleton()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void InitializeManagers()
     {
         updateManager = new UpdateManager();
@@ -73,14 +67,19 @@ public class GameManager : MonoBehaviour
         audioManager.Initialize();
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (!sceneLevel1WasInitialized)
+        if (scene.name == "Level1")
         {
-            if (scene.name == "Level1")
+            if (!sceneLevel1WasInitialized)
             {
                 poolerManager.Initialize();
                 sceneLevel1WasInitialized = true;
+            }
+
+            else
+            {
+                poolerManager.ReinitializeBulletsForScene();
             }
         }
     }

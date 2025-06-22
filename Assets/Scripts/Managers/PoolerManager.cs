@@ -41,6 +41,32 @@ public class PoolerManager
         }
     }
 
+    public void ReinitializeBulletsForScene()
+    {
+        foreach (var bullet in playerBulletPool)
+        {
+            bullet.ReinitializeSceneReferences();
+        }
+
+        foreach (var bullet in enemyBulletPool)
+        {
+            bullet.ReinitializeSceneReferences();
+        }
+    }
+
+    public void ReturnAllBulletsToPool()
+    {
+        foreach (var bullet in playerBulletPool)
+        {
+            bullet.ReturnToPool();
+        }
+
+        foreach (var bullet in enemyBulletPool)
+        {
+            bullet.ReturnToPool();
+        }
+    }
+
 
     private void InitializeBulletPool<T>(GameObject prefab, List<T> pool, Func<Transform, T> createBullet) where T : Bullet
     {

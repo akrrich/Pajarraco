@@ -54,19 +54,16 @@ public abstract class Bullet
         dir = direction.normalized;
     }
 
+    public void ReturnToPool()
+    {
+        returnToPoolCallback?.Invoke(this);
+    }
+
 
     private void SuscribeToUpdateManagerEvents()
     {
         GameManager.Instance.UpdateManager.OnUpdate += UpdateBullet;
         GameManager.Instance.UpdateManager.OnDrawGizmos += OnDrawGizmosBullet;
-    }
-
-
-    // Para un futuro
-    private void UnsuscribeToUpdateManagerEvents()
-    {
-        GameManager.Instance.UpdateManager.OnUpdate -= UpdateBullet;
-        GameManager.Instance.UpdateManager.OnDrawGizmos -= OnDrawGizmosBullet;
     }
 
     private void Movemnt()
@@ -80,8 +77,5 @@ public abstract class Bullet
     
     protected abstract void CheckCollisions();
 
-    protected void ReturnToPool()
-    {
-        returnToPoolCallback?.Invoke(this);
-    }
+    public abstract void ReinitializeSceneReferences();
 }

@@ -37,7 +37,7 @@ public class BulletEnemy : Bullet
     {
         playerController = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
         spriteRenderer = Transform.GetComponentInChildren<SpriteRenderer>();   
-        floor = GameObject.Find("Floor").transform;
+        floor = GameObject.Find("Floor")?.transform;
     }
 
     protected override void Initialize()
@@ -66,6 +66,12 @@ public class BulletEnemy : Bullet
                 ReturnToPool();
             }
         }
+    }
+
+    public override void ReinitializeSceneReferences()
+    {
+        playerController = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        floor = GameObject.Find("Floor")?.transform;
     }
 
     private IEnumerator BlinkEffect()

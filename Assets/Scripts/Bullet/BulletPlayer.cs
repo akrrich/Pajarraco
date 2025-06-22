@@ -29,7 +29,7 @@ public class BulletPlayer : Bullet
     protected override void GetComponents()
     {
         enemyController = UnityEngine.Object.FindFirstObjectByType<EnemyController>();
-        roof = GameObject.Find("Roof").transform;
+        roof = GameObject.Find("Roof")?.transform;
     }
 
     protected override void Initialize()
@@ -53,5 +53,11 @@ public class BulletPlayer : Bullet
                 ReturnToPool();
             }
         }
+    }
+
+    public override void ReinitializeSceneReferences()
+    {
+        enemyController = UnityEngine.Object.FindFirstObjectByType<EnemyController>();
+        roof = GameObject.Find("Roof")?.transform;
     }
 }
