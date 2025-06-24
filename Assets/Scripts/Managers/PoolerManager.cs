@@ -41,7 +41,7 @@ public class PoolerManager
         }
     }
 
-    public void ReinitializeBulletsForScene()
+    public void ReinitializeBulletsReferences()
     {
         foreach (var bullet in playerBulletPool)
         {

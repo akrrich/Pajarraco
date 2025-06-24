@@ -41,10 +41,16 @@ public class PlayerController : CharacterController
         }
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        playerView.UnsuscribeToPlayerModelLifeEvent();
+    }
+
     protected override void GetComponents()
     {
         playerModel = new PlayerModel();
-        playerView = new PlayerView();
+        playerView = new PlayerView(this);
 
         customRB = new CustomRigidBody();
     }
@@ -66,7 +72,7 @@ public class PlayerController : CharacterController
             axis.x = 0;
         }
 
-        customRB.Velocity = new Vector2(axis.x * speed, customRB.Velocity.y);
+        customRB.Velocity = new Vector2(axis.x * playerModel.Speed, customRB.Velocity.y);
         customRB.UpdatePhysics();
         customRB.Move(transform);
     }

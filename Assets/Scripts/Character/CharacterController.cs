@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    [SerializeField] protected float speed;
-
-
     protected virtual void Awake()
     {
         SuscribeToUpdateManagerEvent();

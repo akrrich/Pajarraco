@@ -57,7 +57,7 @@ public class PauseManager
             return;
         }
 
-        else if (Input.GetKeyDown(KeyCode.T) && isGamePaused)
+        else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
         {
             GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
 

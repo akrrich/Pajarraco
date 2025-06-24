@@ -36,10 +36,16 @@ public class EnemyController : CharacterController
         }
     }
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        enemyView.UnsuscribeToEnemyModelHealthBarEvent();
+    }
+
     protected override void GetComponents()
     {
         enemyModel = new EnemyModel();
-        enemyView = new EnemyView();
+        enemyView = new EnemyView(this);
     }
 
     private void Movement()
@@ -49,7 +55,7 @@ public class EnemyController : CharacterController
 
         if (goRight)
         {
-            transform.position += (Vector3.right * speed * Time.deltaTime);
+            transform.position += (Vector3.right * enemyModel.Speed * Time.deltaTime);
 
             if (isTouchingRightEdge)
             {
@@ -59,7 +65,7 @@ public class EnemyController : CharacterController
 
         else
         {
-            transform.position += (Vector3.left * speed * Time.deltaTime);
+            transform.position += (Vector3.left * enemyModel.Speed * Time.deltaTime);
 
             if (isTouchingLeftEdge)
             {

@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 
             else
             {
-                poolerManager.ReinitializeBulletsForScene();
+                poolerManager.ReinitializeBulletsReferences();
             }
         }
     }
