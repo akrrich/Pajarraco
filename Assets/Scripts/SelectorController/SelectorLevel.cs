@@ -24,7 +24,7 @@ public class SelectorLevel : SelectorController
         GameObject canvas = GameObject.Find("CanvasPause");
         GameObject father = canvas.transform.Find("PausePanel").gameObject;
 
-        selectorButton = father.transform.Find("SelectorFather").gameObject;
+        selectorButton = father.transform.Find("SelectorFather").GetComponent<RectTransform>();
 
         for (int i = 0; i < buttonNames.Length; i++)
         {

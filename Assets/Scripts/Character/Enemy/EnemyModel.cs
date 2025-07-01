@@ -3,26 +3,29 @@ using UnityEngine;
 
 public class EnemyModel
 {
-    /// <summary>
-    /// Disparar un evento cuando recibe daño para que lo reciban las balas y puedan aumentar su velocidad y duracion en el suelo
-    /// </summary>
-    /// 
     private Transform rightColumn;
     private Transform leftColumn;
+    private Transform center; /// <summary>
+    /// sirve para acomodar el enemigo en esta posicion cuando se hace el Updgrade
+    /// </summary>
 
     private event Action onUpdateHealthBar;
+    private static event Action onIncreaseBulletSpeed; // Tiene que ser estatico porque se suscribe una unica vez que es cuando se crea el constructor de la bala, por lo tanto si no es estatico despues no existira
+    private static event Action onUpgradeEnemy;
 
-    private int life = 5;
+    private int life = 10;
     private int minLife = 1;
 
     private float speed = 10f;
     private float timeToShoot = 0f;
-    private float maxTimeToShoot = 5f;
+    private float maxTimeToShoot = 3f;
 
     public Transform RightColumn { get => rightColumn; }
     public Transform LeftColumn { get => leftColumn; }
 
     public Action OnUpdateHealthBar { get => onUpdateHealthBar; set => onUpdateHealthBar = value; }
+    public static Action OnIncreaseBulletSpeed { get => onIncreaseBulletSpeed; set => onIncreaseBulletSpeed = value; }
+    public static Action OnUpgradeEnemy { get => onUpgradeEnemy; set => onUpgradeEnemy = value; }
 
     public int Life { get => life; }  
     public float Speed { get => speed; }    
@@ -31,8 +34,14 @@ public class EnemyModel
     public EnemyModel()
     {
         FindObjects();
+        SuscribeToUpgradeEnemy();
     }
 
+
+    public void UnsuscribeToUpgradeEnemy()
+    {
+        EnemyModel.onUpgradeEnemy -= UpgradeEnemyInformation;
+    }
 
     public void Attack(Transform firePosition, Vector2 dir)
     {
@@ -53,30 +62,52 @@ public class EnemyModel
 
         life -= damage;
         onUpdateHealthBar?.Invoke();
-        IncreaseSpeed();
 
         if (life < minLife)
         {
             Death();
+            return;
         }
+
+        IncreaseSpeed();
+        DecreaseMaxTimeShoot();
+        onIncreaseBulletSpeed?.Invoke();
     }
 
+
+    private void SuscribeToUpgradeEnemy()
+    {
+        EnemyModel.onUpgradeEnemy += UpgradeEnemyInformation;
+    }
 
     private void FindObjects()
     {
         rightColumn = GameObject.Find("RightWall").transform;
         leftColumn = GameObject.Find("LeftWall").transform;
+        center = GameObject.Find("Center").transform;
     }
 
     private void Death()
     {
-        Debug.Log("MurioEnemigo");
+        EnemyView.OnEnemyDeath?.Invoke();
     }
 
     private void IncreaseSpeed()
     {
         float speedMultiplier = 1f;
-
         speed += speedMultiplier;
+    }
+
+    private void DecreaseMaxTimeShoot()
+    {
+        float maxTimeToShootMultiplier = 0.1f;
+        maxTimeToShoot -= maxTimeToShootMultiplier;
+    }
+
+    private void UpgradeEnemyInformation()
+    {
+        life = 20;
+
+
     }
 }

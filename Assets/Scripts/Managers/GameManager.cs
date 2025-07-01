@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     private UpdateManager updateManager;
     private ScenesManager scenesManager;
-    private PauseManager pauseManager;
+    private PauseManager pauseManager; 
 
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private PoolerManager poolerManager;

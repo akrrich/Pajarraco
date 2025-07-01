@@ -5,8 +5,11 @@ using System.Collections;
 public class BulletEnemy : Bullet
 {
     private PlayerController playerController;
+    private EnemyController enemyController;
     private SpriteRenderer spriteRenderer;
     private Transform floor;
+
+    private Coroutine blinkCoroutine;
 
     private Color baseNormalColor;
 
@@ -36,12 +39,15 @@ public class BulletEnemy : Bullet
     protected override void GetComponents()
     {
         playerController = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        enemyController = UnityEngine.Object.FindFirstObjectByType<EnemyController>();
         spriteRenderer = Transform.GetComponentInChildren<SpriteRenderer>();   
         floor = GameObject.Find("Floor").transform;
     }
 
     protected override void Initialize()
     {
+        EnemyModel.OnIncreaseBulletSpeed += IncreaseBulletSpeed;
+
         baseNormalColor = spriteRenderer.color;
         speed = 15f;
         damage = 1;
@@ -55,14 +61,26 @@ public class BulletEnemy : Bullet
             {
                 isStayedInFloor = true;
                 dir = Vector2.zero;
-                playerController.StartCoroutine(BlinkEffect());
+
+                if (blinkCoroutine != null)
+                {
+                    enemyController.StopCoroutine(blinkCoroutine);
+                }
+
+                blinkCoroutine = enemyController.StartCoroutine(BlinkEffect());
             }
 
             if (Collisions.CollisionBetweenRects(transform, playerController.transform))
             {
+                if (blinkCoroutine != null)
+                {
+                    enemyController.StopCoroutine(blinkCoroutine);
+                    blinkCoroutine = null;
+                    spriteRenderer.color = baseNormalColor;
+                    isStayedInFloor = false;
+                }
+
                 playerController.PlayerModel.GetDamage(damage);
-                isStayedInFloor = false;
-                spriteRenderer.color = baseNormalColor;
                 ReturnToPool();
             }
         }
@@ -71,10 +89,31 @@ public class BulletEnemy : Bullet
     public override void ReinitializeSceneReferences()
     {
         playerController = UnityEngine.Object.FindFirstObjectByType<PlayerController>();
+        enemyController = UnityEngine.Object.FindFirstObjectByType<EnemyController>();
         floor = GameObject.Find("Floor").transform;
 
+        if (blinkCoroutine != null)
+        {
+            enemyController.StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
+
+        spriteRenderer.color = baseNormalColor;
+        speed = 15f;
+        isStayedInFloor = false;
+    }
+
+    public override void ReturnToPool()
+    {
+        base.ReturnToPool();
         spriteRenderer.color = baseNormalColor;
         isStayedInFloor = false;
+
+        if (blinkCoroutine != null)
+        {
+            enemyController.StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
     }
 
     private IEnumerator BlinkEffect()
@@ -95,6 +134,13 @@ public class BulletEnemy : Bullet
 
         isStayedInFloor = false;
         spriteRenderer.color = baseNormalColor;
-        ReturnToPool();
+        blinkCoroutine = null;
+        base.ReturnToPool();
+    }
+
+    private void IncreaseBulletSpeed()
+    {
+        float speedMultiplier = 1f;
+        speed += speedMultiplier;
     }
 }

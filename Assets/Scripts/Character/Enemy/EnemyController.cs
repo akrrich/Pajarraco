@@ -40,6 +40,8 @@ public class EnemyController : CharacterController
     {
         base.OnDestroy();
         enemyView.UnsuscribeToEnemyModelHealthBarEvent();
+        enemyView.UnsuscribeToEnemyModelUpgradeEnemy();
+        enemyModel.UnsuscribeToUpgradeEnemy();
     }
 
     protected override void GetComponents()

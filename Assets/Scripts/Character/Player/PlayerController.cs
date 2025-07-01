@@ -24,6 +24,7 @@ public class PlayerController : CharacterController
     protected override void UpdateCharacterController()
     {
         base.UpdateCharacterController();
+        playerModel.UpdatePlayerModel();
         PlayerInputs();
         Movement();
         CheckFloorCollision();
@@ -98,7 +99,7 @@ public class PlayerController : CharacterController
 
     private void PlayerInputs()
     {
-        if (!GameManager.Instance.PauseManager.IsGamePaused)
+        if (!GameManager.Instance.PauseManager.IsGamePaused && Time.timeScale == 1f)
         {
             if (Input.GetMouseButtonDown(leftClick))
             {

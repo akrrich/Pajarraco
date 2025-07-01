@@ -25,7 +25,7 @@ public class SelectorMainMenu : SelectorController
     {
         yield return new WaitForSeconds(1);
 
-        selectorButton = GameObject.Find("SelectorFather");
+        selectorButton = GameObject.Find("SelectorFather").GetComponent<RectTransform>();
 
         for (int i = 0; i < buttonNames.Length; i++)
         {

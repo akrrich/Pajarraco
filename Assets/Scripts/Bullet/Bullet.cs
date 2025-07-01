@@ -54,7 +54,7 @@ public abstract class Bullet
         dir = direction.normalized;
     }
 
-    public void ReturnToPool()
+    public virtual void ReturnToPool()
     {
         returnToPoolCallback?.Invoke(this);
     }

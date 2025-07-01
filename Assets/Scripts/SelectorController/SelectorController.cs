@@ -4,7 +4,7 @@ using System.Collections;
 
 public abstract class SelectorController : MonoBehaviour
 {
-    [SerializeField] protected GameObject selectorButton;
+    [SerializeField] protected RectTransform selectorButton;
     [SerializeField] protected List<GameObject> buttons =  new List<GameObject>();
 
     [SerializeField] protected string[] buttonNames;
@@ -48,7 +48,7 @@ public abstract class SelectorController : MonoBehaviour
             if (currentIndex >= buttons.Count)
             {
                 currentIndex = 0;
-                SetSelectorPositionManual(new Vector3(selectorButton.transform.position.x, 310, selectorButton.transform.position.z));
+                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, 0, 0));
                 return;
             }
 
@@ -61,7 +61,7 @@ public abstract class SelectorController : MonoBehaviour
             if (currentIndex < 0)
             {
                 currentIndex = buttons.Count - 1;
-                SetSelectorPositionManual(new Vector3(selectorButton.transform.position.x, -20, selectorButton.transform.position.z));
+                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, -585, 0));
                 return;
             }
 
@@ -72,19 +72,19 @@ public abstract class SelectorController : MonoBehaviour
     private void MoveSelectorDown()
     {
         GameManager.Instance.AudioManager.PlaySFX("ButtonSelected");
-        selectorButton.transform.position += Vector3.down * 110;
+        selectorButton.anchoredPosition += Vector2.down * 195;
     }
 
     private void MoveSelectorUp()
     {
         GameManager.Instance.AudioManager.PlaySFX("ButtonSelected");
-        selectorButton.transform.position += Vector3.up * 110;
+        selectorButton.anchoredPosition += Vector2.up * 195;
     }
 
     private void SetSelectorPositionManual(Vector3 manualPosition)
     {
         GameManager.Instance.AudioManager.PlaySFX("ButtonSelected");
-        selectorButton.transform.position = manualPosition;
+        selectorButton.anchoredPosition = manualPosition;
     }
 
     protected abstract IEnumerator GetComponents();

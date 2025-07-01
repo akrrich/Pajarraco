@@ -7,13 +7,15 @@ public class PlayerModel
     private Transform leftColumn;
     private Transform floor;
 
-    private event Action onUpdateLifesUI;
+    private event Action onUpdateLifesUI; 
 
     private int life = 3;
     private int minLife = 1;
 
     private float speed = 10f;
     private float jumpForce = 8f;
+    private float timeToShoot = 0f;
+    private float maxTimeToShoot = 0.125f;
 
     public Transform RightColumn { get => rightColumn; }
     public Transform LeftColumn { get => leftColumn; }
@@ -30,30 +32,26 @@ public class PlayerModel
         FindObjects();
     }
 
-
-    private void FindObjects()
+    public void UpdatePlayerModel()
     {
-        rightColumn = GameObject.Find("RightWall").transform;
-        leftColumn = GameObject.Find("LeftWall").transform;
-        floor = GameObject.Find("Floor").transform;
-    }
-
-    private void Death()
-    {
-        Debug.Log("Murio");
+        UpdateTimeToShootValue();
     }
 
 
     public void Attack(Transform firePosition, Vector2 dir)
     {
-        GameManager.Instance.AudioManager.PlaySFX("PlayerShoot");
-        GameManager.Instance.PoolerManager.FireBullet(BulletType.Player, firePosition, dir);
+        if (timeToShoot >= maxTimeToShoot)
+        {
+            timeToShoot = 0f;
+
+            GameManager.Instance.AudioManager.PlaySFX("PlayerShoot");
+            GameManager.Instance.PoolerManager.FireBullet(BulletType.Player, firePosition, dir);
+        }
     }
 
     public void Jump(CustomRigidBody customRB)
     {
         GameManager.Instance.AudioManager.PlaySFX("Jump");
-
         customRB.Velocity = new Vector2(customRB.Velocity.x, jumpForce);
     }
 
@@ -67,6 +65,27 @@ public class PlayerModel
         if (life < minLife)
         {
             Death();
+        }
+    }
+
+
+    private void FindObjects()
+    {
+        rightColumn = GameObject.Find("RightWall").transform;
+        leftColumn = GameObject.Find("LeftWall").transform;
+        floor = GameObject.Find("Floor").transform;
+    }
+
+    private void Death()
+    {
+        PlayerView.OnPlayerDeath?.Invoke();
+    }
+
+    private void UpdateTimeToShootValue()
+    {
+        if (timeToShoot <= maxTimeToShoot)
+        {
+            timeToShoot += Time.deltaTime;
         }
     }
 }

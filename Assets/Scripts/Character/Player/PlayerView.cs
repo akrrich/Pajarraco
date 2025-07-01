@@ -12,6 +12,8 @@ public class PlayerView
 
     private static event Action onPlayerDeath;
 
+    public static Action OnPlayerDeath { get => onPlayerDeath; set => onPlayerDeath = value; }
+
 
     public PlayerView(PlayerController playerController)
     {
