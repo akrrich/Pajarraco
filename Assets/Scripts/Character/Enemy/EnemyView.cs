@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
@@ -6,6 +6,9 @@ using System;
 public class EnemyView
 {
     private EnemyModel enemyModel;
+
+    private Animator animator;
+    private SpriteRenderer sr;
 
     private Slider healthBar;
 
@@ -17,11 +20,19 @@ public class EnemyView
     public EnemyView(EnemyController enemyController)
     {
         enemyModel = enemyController.EnemyModel;
-        SuscribeToEnemyModelHealthBarEvent();
-        enemyController.StartCoroutine(SuscribeToEnemyModelUpdageEnemy());
-        enemyController.StartCoroutine(FindHealthBar());
-    }
+        animator = enemyController.GetComponent<Animator>();
+        sr = enemyController.GetComponent<SpriteRenderer>();
+        
 
+
+        // ───── SUSCRIPCIONES ─────
+        
+       
+        SuscribeToEnemyModelHealthBarEvent();
+        enemyController.StartCoroutine(SuscribeToEnemyModelUpgradeEnemy());
+        enemyController.StartCoroutine(FindHealthBar());
+
+    }
 
     public void UnsuscribeToEnemyModelHealthBarEvent()
     {
@@ -40,7 +51,7 @@ public class EnemyView
     }
 
     // Suscribirlo ultimo para que cuando se ejecute lo actualize con la nueva vida
-    private IEnumerator SuscribeToEnemyModelUpdageEnemy()
+    private IEnumerator SuscribeToEnemyModelUpgradeEnemy()
     {
         yield return null;
 
@@ -83,5 +94,10 @@ public class EnemyView
         {
             healthBar.fillRect.gameObject.SetActive(true);
         }
+        
+    }
+    public void FlipAnim(bool value)
+    {
+        sr.flipX = value;
     }
 }
