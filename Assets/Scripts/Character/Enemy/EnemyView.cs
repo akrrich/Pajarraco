@@ -10,28 +10,32 @@ public class EnemyView
     private Animator animator;
     private SpriteRenderer sr;
 
+    private RuntimeAnimatorController batController;
+    private RuntimeAnimatorController eyeController;
+
     private Slider healthBar;
+
+    private bool useFlyEye = false;
 
     private static event Action onEnemyDeath;
 
     public static Action OnEnemyDeath { get => onEnemyDeath; set => onEnemyDeath = value; }
 
 
-    public EnemyView(EnemyController enemyController)
+    public EnemyView(EnemyController enemyController,
+        RuntimeAnimatorController batController,
+        RuntimeAnimatorController eyeController)
     {
         enemyModel = enemyController.EnemyModel;
         animator = enemyController.GetComponent<Animator>();
         sr = enemyController.GetComponent<SpriteRenderer>();
-        
 
-
-        // ───── SUSCRIPCIONES ─────
-        
-       
         SuscribeToEnemyModelHealthBarEvent();
         enemyController.StartCoroutine(SuscribeToEnemyModelUpgradeEnemy());
         enemyController.StartCoroutine(FindHealthBar());
-
+        this.eyeController = eyeController;
+        this.batController = batController;
+        animator.runtimeAnimatorController = batController;
     }
 
     public void UnsuscribeToEnemyModelHealthBarEvent()
@@ -94,7 +98,12 @@ public class EnemyView
         {
             healthBar.fillRect.gameObject.SetActive(true);
         }
-        
+        useFlyEye = !useFlyEye;
+        animator.runtimeAnimatorController = useFlyEye ? eyeController : batController;
+
+        animator.Rebind();
+        animator.Update(0f);
+
     }
     public void FlipAnim(bool value)
     {

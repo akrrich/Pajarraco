@@ -5,8 +5,8 @@ public class EnemyController : CharacterController
     private EnemyModel enemyModel;
     private EnemyView enemyView;
 
-    [SerializeField] private RuntimeAnimatorController normalController;
-    [SerializeField] private RuntimeAnimatorController newController;
+    [SerializeField] private RuntimeAnimatorController batController;
+    [SerializeField] private RuntimeAnimatorController eyeController;
 
     private bool goRight = true;
 
@@ -50,7 +50,7 @@ public class EnemyController : CharacterController
     protected override void GetComponents()
     {
         enemyModel = new EnemyModel();
-        enemyView = new EnemyView(this,normalController,newController);
+        enemyView = new EnemyView(this,batController,eyeController);
     }
 
     private void Movement()

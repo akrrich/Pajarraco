@@ -912,8 +912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bc9697df4af65149ad0648bccdb4691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalController: {fileID: 9100000, guid: bf6a20d8ea7b814419832ca36b51ca36, type: 2}
-  newController: {fileID: 9100000, guid: 564b3db30dd8f4545a590096aed22ea3, type: 2}
+  batController: {fileID: 9100000, guid: bf6a20d8ea7b814419832ca36b51ca36, type: 2}
+  eyeController: {fileID: 9100000, guid: 564b3db30dd8f4545a590096aed22ea3, type: 2}
 --- !u!95 &1974305408
 Animator:
   serializedVersion: 5
