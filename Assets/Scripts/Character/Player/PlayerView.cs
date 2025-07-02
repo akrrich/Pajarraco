@@ -7,6 +7,8 @@ using System;
 public class PlayerView
 {
     private PlayerModel playerModel;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     private List<Image> lifes = new List<Image>();
 
@@ -18,6 +20,8 @@ public class PlayerView
     public PlayerView(PlayerController playerController)
     {
         playerModel = playerController.PlayerModel;
+        animator=playerController.GetComponentInChildren<Animator>();
+        spriteRenderer = playerController.GetComponentInChildren<SpriteRenderer>();
         SuscribeToPlayerModelLifeEvent();
         playerController.StartCoroutine(FindHearts());
     }
@@ -57,4 +61,12 @@ public class PlayerView
             lifes[i].enabled = i < currentLifes;
         }
     }
+    public void UpdateAnimation(float speed,float dirX)
+    {
+        animator.SetFloat("Speed",Mathf.Abs(speed));
+        if (dirX > 0.01f) spriteRenderer.flipX = false;
+        else if (dirX < -0.01f) spriteRenderer.flipX = true;
+    }
+    
+    public void PlayJump() => animator.SetTrigger("IsJumping");
 }

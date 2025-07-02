@@ -10,7 +10,7 @@ public class PlayerController : CharacterController
     private int leftClick = 0;
 
     private bool isGrounded = false;
-
+    private float animSpeed;
     public PlayerModel PlayerModel { get => playerModel; }
 
 
@@ -76,6 +76,7 @@ public class PlayerController : CharacterController
         customRB.Velocity = new Vector2(axis.x * playerModel.Speed, customRB.Velocity.y);
         customRB.UpdatePhysics();
         customRB.Move(transform);
+        UpdateAnimation();
     }
 
     private void CheckFloorCollision()
@@ -104,12 +105,20 @@ public class PlayerController : CharacterController
             if (Input.GetMouseButtonDown(leftClick))
             {
                 playerModel.Attack(transform, Vector2.up);
+                
             }
 
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 playerModel.Jump(customRB);
+                playerView.PlayJump();
             }
         }
+    }
+    private void UpdateAnimation()
+    {
+        animSpeed = Mathf.Abs(customRB.Velocity.x);
+        float vx = customRB.Velocity.x;
+        playerView.UpdateAnimation(animSpeed,vx);
     }
 }
