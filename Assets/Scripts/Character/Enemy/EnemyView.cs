@@ -9,33 +9,29 @@ public class EnemyView
 
     private Animator animator;
     private SpriteRenderer sr;
+    private Slider healthBar;
+    private Image fillSliderImage;
 
     private RuntimeAnimatorController batController;
     private RuntimeAnimatorController eyeController;
 
-    private Slider healthBar;
+    private static event Action onEnemyDeath;
 
     private bool useFlyEye = false;
-
-    private static event Action onEnemyDeath;
 
     public static Action OnEnemyDeath { get => onEnemyDeath; set => onEnemyDeath = value; }
 
 
-    public EnemyView(EnemyController enemyController,
-        RuntimeAnimatorController batController,
-        RuntimeAnimatorController eyeController)
+    public EnemyView(EnemyController enemyController, RuntimeAnimatorController batController, RuntimeAnimatorController eyeController)
     {
-        enemyModel = enemyController.EnemyModel;
-        animator = enemyController.GetComponent<Animator>();
-        sr = enemyController.GetComponent<SpriteRenderer>();
-
+        GetComponents(enemyController);
         SuscribeToEnemyModelHealthBarEvent();
         enemyController.StartCoroutine(SuscribeToEnemyModelUpgradeEnemy());
         enemyController.StartCoroutine(FindHealthBar());
+
         this.eyeController = eyeController;
         this.batController = batController;
-        animator.runtimeAnimatorController = batController;
+        animator.runtimeAnimatorController = eyeController;
     }
 
     public void UnsuscribeToEnemyModelHealthBarEvent()
@@ -46,6 +42,11 @@ public class EnemyView
     public void UnsuscribeToEnemyModelUpgradeEnemy()
     {
         EnemyModel.OnUpgradeEnemy -= UpgradeEnemyInformation;
+    }
+
+    public void FlipAnim(bool value)
+    {
+        sr.flipX = value;
     }
 
 
@@ -62,11 +63,19 @@ public class EnemyView
         EnemyModel.OnUpgradeEnemy += UpgradeEnemyInformation;
     }
 
+    private void GetComponents(EnemyController enemyController)
+    {
+        enemyModel = enemyController.EnemyModel;
+        animator = enemyController.GetComponent<Animator>();
+        sr = enemyController.GetComponent<SpriteRenderer>();
+    }
+
     private IEnumerator FindHealthBar()
     {
         yield return new WaitForSeconds(1);
 
         healthBar = GameObject.Find("CanvasEnemyHealthBar").GetComponentInChildren<Slider>();
+        fillSliderImage = healthBar.fillRect.GetComponent<Image>();
 
         InitializeHealthBarValues();
     }
@@ -84,7 +93,9 @@ public class EnemyView
 
         if (healthBar.value == 0)
         {
-            healthBar.fillRect.gameObject.SetActive(false);
+            Color currentColor = fillSliderImage.color;
+            currentColor.a = 0f;
+            fillSliderImage.color = currentColor;
         }
     }
 
@@ -96,17 +107,15 @@ public class EnemyView
 
         if (healthBar != null)
         {
-            healthBar.fillRect.gameObject.SetActive(true);
+            Color currentColor = fillSliderImage.color;
+            currentColor.a = 1f;
+            fillSliderImage.color = currentColor;
         }
+
         useFlyEye = !useFlyEye;
-        animator.runtimeAnimatorController = useFlyEye ? eyeController : batController;
+        animator.runtimeAnimatorController = useFlyEye ? batController : eyeController;
 
         animator.Rebind();
         animator.Update(0f);
-
-    }
-    public void FlipAnim(bool value)
-    {
-        sr.flipX = value;
     }
 }

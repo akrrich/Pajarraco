@@ -11,6 +11,7 @@ public class PlayerController : CharacterController
 
     private bool isGrounded = false;
     private float animSpeed;
+
     public PlayerModel PlayerModel { get => playerModel; }
 
 
@@ -111,10 +112,10 @@ public class PlayerController : CharacterController
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
             {
                 playerModel.Jump(customRB);
-                playerView.PlayJump();
             }
         }
     }
+
     private void UpdateAnimation()
     {
         animSpeed = Mathf.Abs(customRB.Velocity.x);

@@ -50,7 +50,7 @@ public class EnemyController : CharacterController
     protected override void GetComponents()
     {
         enemyModel = new EnemyModel();
-        enemyView = new EnemyView(this,batController,eyeController);
+        enemyView = new EnemyView(this, batController, eyeController);
     }
 
     private void Movement()

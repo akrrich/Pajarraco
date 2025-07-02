@@ -5,6 +5,8 @@ public class SelectorLevel : SelectorController
 {
     protected override void Awake()
     {
+        GameManager.Instance.AudioManager.PlayMusic("Game");
+
         base.Awake();
         StartCoroutine(GetComponents());
     }
@@ -32,6 +34,13 @@ public class SelectorLevel : SelectorController
 
             buttons.Add(currentButtonName);
         }
+    }
+
+    protected override void Initialize()
+    {
+        multiplierSelectedElement = 195;
+        manualPositionFirstY = 0;
+        manualPositionLastY = -585;
     }
 
     protected override void InteractWithCurrentButton()

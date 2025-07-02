@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class PauseManager
 {
-    private Image pausePanels;
-    private RawImage[] pausePanelElements;
+    private Image pausePanel;
+    private Image[] pausePanelElements;
     
     private bool isGamePaused = false;
 
@@ -22,7 +23,7 @@ public class PauseManager
     // Simulacion de Update
     void UpdatePauseManager()
     {
-        if (pausePanels != null)
+        if (pausePanel != null)
         {
             CheckPauseStatus();
         }
@@ -31,10 +32,12 @@ public class PauseManager
 
     public void ResumeGameButton()
     {
+        GameManager.Instance.AudioManager.PlayMusic("Game");
         isGamePaused = false;
-        Color currentColor = pausePanels.color;
+
+        Color currentColor = pausePanel.color;
         currentColor.a = 0f;
-        pausePanels.color = currentColor;
+        pausePanel.color = currentColor;
 
         foreach (var pauseElements in pausePanelElements)
         {
@@ -61,11 +64,12 @@ public class PauseManager
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !isGamePaused)
         {
+            GameManager.Instance.AudioManager.PlayMusic("Pause");
             GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
 
-            Color currentColor = pausePanels.color;
+            Color currentColor = pausePanel.color;
             currentColor.a = 181f / 255f;
-            pausePanels.color = currentColor;
+            pausePanel.color = currentColor;
 
             foreach (var pauseElements in pausePanelElements)
             {
@@ -81,11 +85,12 @@ public class PauseManager
 
         else if (Input.GetKeyDown(KeyCode.Escape) && isGamePaused)
         {
+            GameManager.Instance.AudioManager.PlayMusic("Game");
             GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
 
-            Color currentColor = pausePanels.color;
+            Color currentColor = pausePanel.color;
             currentColor.a = 0f;
-            pausePanels.color = currentColor;
+            pausePanel.color = currentColor;
 
             foreach (var pauseElements in pausePanelElements)
             {
@@ -112,7 +117,7 @@ public class PauseManager
 
         GameObject canvas = GameObject.Find("CanvasPause");
 
-        pausePanels = canvas.transform.Find("PausePanel").GetComponentInChildren<Image>();
-        pausePanelElements = pausePanels.GetComponentsInChildren<RawImage>();
+        pausePanel = canvas.transform.Find("PausePanel").GetComponentInChildren<Image>();
+        pausePanelElements = pausePanel.GetComponentsInChildren<Image>().Where(image => image != pausePanel).ToArray();
     }
 }

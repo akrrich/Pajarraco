@@ -66,12 +66,12 @@ public class AudioManager
 
     public void SetMusicVolume(float volume)
     {
-        musicMixerGroup.audioMixer.SetFloat("Music", Mathf.Log10(volume) * 20);
+        musicMixerGroup.audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
     }
 
     public void SetSFXVolume(float volume)
     {
-        sfxMixerGroup.audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        sfxMixerGroup.audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
     }
 
 

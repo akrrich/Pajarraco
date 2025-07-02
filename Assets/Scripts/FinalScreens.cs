@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FinalScreens : MonoBehaviour
 {
-    [SerializeField] private GameObject winPanel;
-    [SerializeField] private GameObject loosePanel;
+    private Image winPanel;
+    private Image loosePanel;
 
 
     void Awake()
@@ -44,38 +45,49 @@ public class FinalScreens : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
-        winPanel = GameObject.Find("CanvasWinScreen").transform.Find("WinPanel").gameObject;
-        loosePanel = GameObject.Find("CanvasLooseScreen").transform.Find("LoosePanel").gameObject;
+        winPanel = GameObject.Find("CanvasWinScreen").transform.Find("WinPanel").GetComponent<Image>();
+        loosePanel = GameObject.Find("CanvasLooseScreen").transform.Find("LoosePanel").GetComponent<Image>();
     }
 
     private void ShowLoosePanel()
     {
         Time.timeScale = 0f;
-        loosePanel.SetActive(true);
+
+        Color currentColor = loosePanel.color;
+        currentColor.a = 255 / 255f;
+        loosePanel.color = currentColor;
     }
 
     private void ShowWinPanel()
     {
         Time.timeScale = 0f;
-        winPanel.SetActive(true);
+        
+        Color currentColor = winPanel.color;
+        currentColor.a = 255 / 255f;
+        winPanel.color = currentColor;
     }
 
     private void UpdateLoosePanelInfo()
     {
         if (loosePanel != null)
         {
-            if (loosePanel.activeSelf)
+            if (loosePanel.color.a == 1f)
             {
                 if (Input.GetKeyDown(KeyCode.R))
                 {
+                    GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
+
                     Time.timeScale = 1f;
-                    GameManager.Instance.ScenesManager.ChangeScene("Level1", "Level1UI");
+                    GameManager.Instance.ScenesManager.ChangeScene("Level", "LevelUI");
                     GameManager.Instance.PoolerManager.ReturnAllBulletsToPool();
                     GameManager.Instance.PoolerManager.ReinitializeBulletsReferences();
+                    SelectorMainMenu.OnPausePanelFind?.Invoke();
                 }
 
                 if (Input.GetKeyDown(KeyCode.M))
                 {
+                    GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
+
                     Time.timeScale = 1f;
                     GameManager.Instance.ScenesManager.ChangeScene("MainMenu", "MainMenuUI");
                     GameManager.Instance.PoolerManager.ReturnAllBulletsToPool();
@@ -88,21 +100,28 @@ public class FinalScreens : MonoBehaviour
     {
         if (winPanel != null)
         {
-            if (winPanel.activeSelf)
+            if (winPanel.color.a == 1f)
             {
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
+                    GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
+
                     Time.timeScale = 1f;
 
                     // Agregar un Upgrade del escenario
                     EnemyModel.OnUpgradeEnemy?.Invoke();
 
                     GameManager.Instance.PoolerManager.ReturnAllBulletsToPool();
-                    winPanel.SetActive(false);
+
+                    Color currentColor = winPanel.color;
+                    currentColor.a = 0f;
+                    winPanel.color = currentColor;
                 }
 
                 if (Input.GetKeyDown(KeyCode.M))
                 {
+                    GameManager.Instance.AudioManager.PlaySFX("ButtonClick");
+
                     Time.timeScale = 1f;
                     GameManager.Instance.ScenesManager.ChangeScene("MainMenu", "MainMenuUI");
                     GameManager.Instance.PoolerManager.ReturnAllBulletsToPool();

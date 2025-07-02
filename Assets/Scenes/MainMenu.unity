@@ -123,6 +123,74 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &336344107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 336344110}
+  - component: {fileID: 336344109}
+  - component: {fileID: 336344108}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &336344108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336344107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &336344109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336344107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &336344110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336344107}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594322163
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +419,15 @@ MonoBehaviour:
     sfxMixerGroup: {fileID: 5332535037038415134, guid: 06da7273c5d937246ae3c6a87c079e6a, type: 2}
     musicSource: {fileID: 594322165}
     sfxSource: {fileID: 594322164}
-    musicClips: []
+    musicClips:
+    - name: MainMenu
+      clip: {fileID: 8300000, guid: c7161cbe89e77194c9ff3dcd851942d3, type: 3}
+    - name: Game
+      clip: {fileID: 8300000, guid: 18f9b768bce703b4eb990ff07b9ac9f6, type: 3}
+    - name: Pause
+      clip: {fileID: 8300000, guid: b9d8ee056fc9ca24daf64790c140f015, type: 3}
+    - name: Credits
+      clip: {fileID: 8300000, guid: 58d9c8c38709b2f4fb1a47e4008fdc8f, type: 3}
     sfxClips:
     - name: ButtonClick
       clip: {fileID: 8300000, guid: e5536e0ec535fb44d8289754b5defe88, type: 3}
@@ -438,6 +514,7 @@ MonoBehaviour:
   - ButtonSettings
   - ButtonCredits
   - ButtonExit
+  panelSettings: {fileID: 0}
 --- !u!1 &1657175260
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,3 +614,4 @@ SceneRoots:
   - {fileID: 1657175263}
   - {fileID: 1069662637}
   - {fileID: 594322167}
+  - {fileID: 336344110}

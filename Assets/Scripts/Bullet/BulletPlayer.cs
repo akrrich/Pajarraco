@@ -35,7 +35,7 @@ public class BulletPlayer : Bullet
     protected override void Initialize()
     {
         speed = 15f;
-        damage = 15;
+        damage = 1;
     }
 
     protected override void CheckCollisions()

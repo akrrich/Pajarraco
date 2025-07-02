@@ -5,9 +5,6 @@ public class EnemyModel
 {
     private Transform rightColumn;
     private Transform leftColumn;
-    private Transform center; /// <summary>
-    /// sirve para acomodar el enemigo en esta posicion cuando se hace el Updgrade
-    /// </summary>
 
     private event Action onUpdateHealthBar;
     private static event Action onIncreaseBulletSpeed; // Tiene que ser estatico porque se suscribe una unica vez que es cuando se crea el constructor de la bala, por lo tanto si no es estatico despues no existira
@@ -84,7 +81,6 @@ public class EnemyModel
     {
         rightColumn = GameObject.Find("RightWall").transform;
         leftColumn = GameObject.Find("LeftWall").transform;
-        center = GameObject.Find("Center").transform;
     }
 
     private void Death()

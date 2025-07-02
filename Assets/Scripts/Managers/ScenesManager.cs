@@ -23,18 +23,7 @@ public class ScenesManager
 
     private void SetInitializedScene()
     {
-        Scene initializedCurrentScene = SceneManager.GetActiveScene();
-
-        switch (initializedCurrentScene.name)
-        {
-            case "MainMenu":
-                LoadSceneAdditive("MainMenuUI");
-                break;
-
-            case "Level1":
-                LoadSceneAdditive("Level1UI");
-                break;
-        }
+        LoadSceneAdditive("MainMenuUI");
     }
 
     private AsyncOperation LoadSceneAdditive(string sceneName)

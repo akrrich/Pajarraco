@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Level1")
+        if (scene.name == "Level")
         {
             if (!sceneLevel1WasInitialized)
             {

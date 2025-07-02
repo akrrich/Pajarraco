@@ -9,12 +9,17 @@ public abstract class SelectorController : MonoBehaviour
 
     [SerializeField] protected string[] buttonNames;
 
+    protected float multiplierSelectedElement;
+    protected float manualPositionFirstY;
+    protected float manualPositionLastY;
+
     protected int currentIndex = 0;
 
 
     protected virtual void Awake()
     {
         SuscribeToUpdateManagerEvent();
+        Initialize();
     }
 
     // Simulacion de Update
@@ -48,7 +53,7 @@ public abstract class SelectorController : MonoBehaviour
             if (currentIndex >= buttons.Count)
             {
                 currentIndex = 0;
-                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, 0, 0));
+                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, manualPositionFirstY, 0));
                 return;
             }
 
@@ -61,7 +66,7 @@ public abstract class SelectorController : MonoBehaviour
             if (currentIndex < 0)
             {
                 currentIndex = buttons.Count - 1;
-                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, -585, 0));
+                SetSelectorPositionManual(new Vector3(selectorButton.anchoredPosition.x, manualPositionLastY, 0));
                 return;
             }
 
@@ -72,13 +77,13 @@ public abstract class SelectorController : MonoBehaviour
     private void MoveSelectorDown()
     {
         GameManager.Instance.AudioManager.PlaySFX("ButtonSelected");
-        selectorButton.anchoredPosition += Vector2.down * 195;
+        selectorButton.anchoredPosition += Vector2.down * multiplierSelectedElement;
     }
 
     private void MoveSelectorUp()
     {
         GameManager.Instance.AudioManager.PlaySFX("ButtonSelected");
-        selectorButton.anchoredPosition += Vector2.up * 195;
+        selectorButton.anchoredPosition += Vector2.up * multiplierSelectedElement;
     }
 
     private void SetSelectorPositionManual(Vector3 manualPosition)
@@ -88,6 +93,8 @@ public abstract class SelectorController : MonoBehaviour
     }
 
     protected abstract IEnumerator GetComponents();
+
+    protected abstract void Initialize();
 
     protected abstract void InteractWithCurrentButton();
 }
