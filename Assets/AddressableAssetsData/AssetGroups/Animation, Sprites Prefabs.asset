@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Animation, Sprites Prefabs
+  m_EditorClassIdentifier: 
+  m_GroupName: Animation, Sprites Prefabs
+  m_Data:
+    m_SerializedData: []
+  m_GUID: de64d988102325641b2c69d1c7e81e8b
+  m_SerializeEntries:
+  - m_GUID: 4c4718430ae3993409360a5474573c91
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Fireball/fireball4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8615bf84e9a5a13428ae6275a562a853
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Fireball/fireball1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a74da400f08b35d489c837658f327fe1
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Fireball/fireball2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 486879228a060ff43b93b20c2a5b05f3
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Fireball/fireball3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd576a63c88523e4da16d06ea85290ef
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Fireball/Fireball_Animation.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4293e13a7b4a2cc468580195d393ff91
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Player-Shoot/player-shoot4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b02c5e3379f6444f8166205160b9e09
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Player-Shoot/player-shoot1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1ae16f22a84c5249a6c734d00b55333
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Player-Shoot/player-shoot2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b923d9dc483ca5c449c9f0a3fd79bfd8
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Player-Shoot/player-shoot3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25e3e46ac29408f4eb64b5d61308742a
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/BULLETS/Player-Shoot/Bullet.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c889ff82fecf5b640bb8e75a0eba78fe
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 375876dcc3a2b2942a59201de070830b
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 94c6bfeeaecf4e548b432612f7c9519e
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9e15c84997439a841948f7de7ae89ed6
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8260fa3e4fbaa204d8ba008dd62c4b27
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be1758156d324504ebe4c30af194d83e
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-idle/player-idle5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7584898c9e3dffc429544ee14d2350f7
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-jump/player-fall.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d8e45da9d8b33e408a42c26c977adb4
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Player-jump/player-jump1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 361268217f70db04e9672a89fb75168e
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc5f509d291ab71448a2fa8259615cca
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eef56f91b25caf948b6d3c8d4da57124
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a835b8ee0b0bbc40aa74e7b3b977c2d
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4763eb516922c54da4b7fd9abb8483f
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcc2cced73d7bd04f9fcc2b33b9e5e82
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/player-run/player-run2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9dcc6ecb1a337f4281992b121099626
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Animations/shoot.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a90654ee5368c34c9818975f6ad5241
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Animations/Jump.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee68c9a3333679744864f72a18f9102e
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Animations/idle player.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da0a243178e918f43a7b2c579a30a126
+    m_Address: Assets/ASSETS PROGRAMACION SISTEMAS/Player/Animations/run 1.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 51e2522de00c1ea49ad0e978121d9169, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 321ca5584b1085546a8e7e769b9a509f, type: 2}
+    - {fileID: 11400000, guid: df17e409ee4cc284aa8b0e8d574a8a53, type: 2}

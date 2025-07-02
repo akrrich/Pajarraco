@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI Assets
+  m_EditorClassIdentifier: 
+  m_GroupName: UI Assets
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7610244ccc0baa4409c40f6e9dd2622b
+  m_SerializeEntries:
+  - m_GUID: 205e8cb7c725414428f20de40da1f91e
+    m_Address: Assets/UI/Triangle.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e81a203cc49cad42b3deeecd72a2c30
+    m_Address: Assets/UI/Hearth.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d7c1a5acb3d95e4d826a39c4e5584c7
+    m_Address: Assets/UI/Credits.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8196f36a14cf930489ae80c560c24e31
+    m_Address: Assets/UI/Botones_Pajarracos.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5521ead542b95754081099573f09a0b5
+    m_Address: Assets/UI/LoosePanel.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17d5ca7f154c5d640965376c0f0b3e87
+    m_Address: Assets/UI/WinPanel.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82d823751565406439c18eaf509073c1
+    m_Address: Assets/UI/MainMenuBackground.jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f280f0ff255ddd40b36571ac05d7466
+    m_Address: CreditsUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44c285d3b8173e84a8facddbe480e267
+    m_Address: MainMenuUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2b793f655a0523c4c892ebdd79b07930
+    m_Address: LevelUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9333fc0ec9fc05841ab5dfe42e28cd75
+    m_Address: Credits
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b588aaac49672a449b6d6a88b3e0fc71
+    m_Address: MainMenu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c9cfa26abfee488c85f1582747f6a02
+    m_Address: Level
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 51e2522de00c1ea49ad0e978121d9169, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1e6b8319bce8c884eb6d9a3eb380fee0, type: 2}
+    - {fileID: 11400000, guid: 9c391786f641e3c4296a8634167d7978, type: 2}

@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Music and audio
+  m_EditorClassIdentifier: 
+  m_GroupName: Music and audio
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 4fdcdb1a86a9dec4eb2cdce8ed6e2ad6
+  m_SerializeEntries:
+  - m_GUID: c7161cbe89e77194c9ff3dcd851942d3
+    m_Address: Assets/Musics/MainMenu.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9d8ee056fc9ca24daf64790c140f015
+    m_Address: Assets/Musics/Pause.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58d9c8c38709b2f4fb1a47e4008fdc8f
+    m_Address: Assets/Musics/Credits.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18f9b768bce703b4eb990ff07b9ac9f6
+    m_Address: Assets/Musics/Game.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14e401cfc90a6794aa7eacaf059a214a
+    m_Address: Assets/Audios/Shoot Sound Player.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82100c690110a064894b64cdc40e8cec
+    m_Address: Assets/Audios/Shoot Sound Enemy.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 464879fea01c6e2419d2afcdce8beb10
+    m_Address: "Assets/Audios/sonidoDa\xF1oPersonajePrincipal.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 48030d3bcd6062744bf680461a318a5f
+    m_Address: "Assets/Audios/sonidoDa\xF1oEnemigo.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9363196cb2a56247917e37a0ab81554
+    m_Address: Assets/Audios/Jump.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5536e0ec535fb44d8289754b5defe88
+    m_Address: Assets/Audios/UI/ButtonClick.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5efeb0230d9e06c4281ffcfef09723b3
+    m_Address: Assets/Audios/UI/ButtonSelected.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 51e2522de00c1ea49ad0e978121d9169, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4b77015390967214597fdefe48fb0424, type: 2}
+    - {fileID: 11400000, guid: 2ae364c95d4fea544b31c75d77c10861, type: 2}

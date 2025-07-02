@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 
 public class ScenesManager
 {
@@ -26,13 +29,37 @@ public class ScenesManager
         LoadSceneAdditive("MainMenuUI");
     }
 
-    private AsyncOperation LoadSceneAdditive(string sceneName)
+    private AsyncOperationHandle<SceneInstance> LoadSceneAdditive(string sceneAddress)
     {
-        return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        var handle = Addressables.LoadSceneAsync(sceneAddress, LoadSceneMode.Additive);
+        handle.Completed += op =>
+        {
+            if (op.Status == AsyncOperationStatus.Succeeded)
+            {
+                Debug.Log($"[Addressables] Additive scene loaded: {sceneAddress}");
+            }
+            else
+            {
+                Debug.LogError($"[Addressables] Failed to load additive scene: {sceneAddress}");
+            }
+        };
+        return handle;
     }
 
-    private AsyncOperation LoadScene(string sceneName)
+    private AsyncOperationHandle<SceneInstance> LoadScene(string sceneAddress)
     {
-        return SceneManager.LoadSceneAsync(sceneName);
+        var handle = Addressables.LoadSceneAsync(sceneAddress, LoadSceneMode.Single);
+        handle.Completed += op =>
+        {
+            if (op.Status == AsyncOperationStatus.Succeeded)
+            {
+                Debug.Log($"[Addressables] Scene loaded: {sceneAddress}");
+            }
+            else
+            {
+                Debug.LogError($"[Addressables] Failed to load scene: {sceneAddress}");
+            }
+        };
+        return handle;
     }
 }
